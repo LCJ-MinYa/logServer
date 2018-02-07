@@ -11,7 +11,7 @@ module.exports = class extends think.Logic {
 				return false;
 			}
 			if (!matchEmail(param.email)) {
-				this.fail(400, '非法的邮箱地址!');
+				this.fail(400, '请输入正确的邮箱地址!');
 				return false;
 			}
 			if (!param.password) {
@@ -19,7 +19,7 @@ module.exports = class extends think.Logic {
 				return false;
 			}
 			if (param.password.length < 6) {
-				this.fail(400, '非法的密码格式!');
+				this.fail(400, '密码不能小于6位数!');
 				return false;
 			}
 		}
