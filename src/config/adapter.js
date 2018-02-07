@@ -41,16 +41,16 @@ exports.model = {
     mongo: {
         host: '106.15.193.97',
         port: '9000',
-        user: 'chatRoot',
-        password: '123456',
+        user: '',
+        password: '',
         database: 'chat',
         prefix: '',
     },
     mongoPassword: {
         host: '106.15.193.97',
         port: '9000',
-        user: 'shyRoot',
-        password: '123456',
+        user: '',
+        password: '',
         database: 'shy',
         prefix: '',
     }
