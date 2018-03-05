@@ -13,9 +13,11 @@ module.exports = class extends think.Controller {
     }
     __before() {
         const param = this.isGet ? this.get() : this.post();
-        if (param.accessToken !== encryp.sha1(param.uid + param.timestamp).substring(3, 10)) {
-            this.fail(401, '瞎请求干啥，心疼我的服务器!');
-            return false;
+        if (param.accessToken) {
+            if (param.accessToken !== encryp.sha1(param.uid + param.timestamp).substring(3, 10)) {
+                this.fail(401, '瞎请求干啥，心疼我的服务器!');
+                return false;
+            }
         }
 
         if (this.isGet) {
