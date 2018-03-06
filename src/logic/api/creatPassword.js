@@ -2,7 +2,6 @@ export default class CreatPassword extends think.Logic {
 	indexAction() {
 		if (this.isPost) {
 			const param = this.post();
-			console.log(param);
 
 			if (!param.title) {
 				this.fail(400, '密码名称不能为空!');

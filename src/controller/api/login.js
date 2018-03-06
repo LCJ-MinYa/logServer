@@ -1,9 +1,5 @@
 const BaseRest = require('./rest.js');
 
-// 连接多个数据库写法
-// const a = think.mongo('AsiaNoCode', 'mongoPassword');
-// let shyData = await a.page(1).select();
-
 export default class Login extends BaseRest {
 	async indexAction() {
 		if (this.isPost) {
