@@ -17,8 +17,19 @@ export default class CreatPassword extends BaseRest {
 			const PasswordList = think.mongo('PasswordList', 'mongoPassword');
 			let param = this.post();
 			delete param.accessToken;
-			await PasswordList.add(param);
-			this.success({}, '添加成功');
+			let result = await PasswordList.where({
+				uid: param.uid,
+				title: param.title,
+				url: param.url,
+				userName: param.userName,
+				password: param.password,
+			}).thenAdd(param);
+			console.log(result);
+			if (result.type == 'add') {
+				this.success({}, '新增密码数据信息成功');
+			} else {
+				this.fail(401, '已存在相同密码数据信息');
+			}
 		}
 	}
 }
