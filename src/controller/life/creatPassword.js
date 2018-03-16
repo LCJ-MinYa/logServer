@@ -26,7 +26,9 @@ export default class CreatPassword extends BaseRest {
 			}).thenAdd(param);
 			console.log(result);
 			if (result.type == 'add') {
-				this.success({}, '新增密码数据信息成功');
+				this.success({
+					_id: result._id
+				}, '新增密码数据信息成功');
 			} else {
 				this.fail(401, '已存在相同密码数据信息');
 			}
