@@ -7,8 +7,8 @@ export default class CreatPassword extends think.Logic {
 				this.fail(400, '密码名称不能为空!');
 				return false;
 			}
-			if (param.title.length > 10) {
-				this.fail(400, '密码名称不能超过10个字符!');
+			if (param.title.length > 15) {
+				this.fail(400, '密码名称不能超过15个字符!');
 				return false;
 			}
 			if (!param.url) {
