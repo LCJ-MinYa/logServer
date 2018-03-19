@@ -9,15 +9,31 @@ export default class UpdataPassword extends BaseRest {
             let result = await PasswordList.where({
                 _id: param._id
             }).select();
-            console.log(result);
-            console.log(param);
-            // if (result.type == 'add') {
-            //     this.success({
-            //         _id: result._id
-            //     }, '新增密码数据信息成功');
-            // } else {
-            //     this.fail(401, '已存在相同密码数据信息');
-            // }
+            if (result.length !== 0) {
+                let shouldUpdate = false;
+                for (let i in param) {
+                    if (i == 'timestamp' || i == '_id' || i == 'uid') {
+                        continue;
+                    }
+                    if (param[i] !== result[0][i]) {
+                        shouldUpdate = true;
+                    }
+                }
+                if (shouldUpdate) {
+                    let affectedRows = await PasswordList.where({
+                        _id: param._id
+                    }).update(param);
+                    if (affectedRows) {
+                        this.success({}, '修改密码数据信息成功');
+                    } else {
+                        this.fail(401, '修改密码数据信息失败');
+                    }
+                } else {
+                    this.fail(401, '密码信息相同,不需要修改');
+                }
+            } else {
+                this.fail(401, '未匹配到该密码信息');
+            }
         }
     }
 }

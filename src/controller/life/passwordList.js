@@ -8,7 +8,7 @@ export default class PasswordList extends BaseRest {
 			let result = await PasswordList.where({
 				uid: param.uid,
 				type: param.type,
-			}).select();
+			}).order('timestamp').select();
 			this.success(result, '获取密码列表成功');
 		}
 	}
