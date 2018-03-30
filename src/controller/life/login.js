@@ -15,10 +15,10 @@ export default class Login extends BaseRest {
 						userName: result[0].userName
 					}, '登录成功');
 				} else {
-					this.fail(401, '密码错误');
+					this.fail(401, '用户名或密码错误!');
 				}
 			} else {
-				this.fail(401, '用户不存在');
+				this.fail(401, '用户名或密码错误!');
 			}
 		}
 	}
