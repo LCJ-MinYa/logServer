@@ -1,4 +1,4 @@
-const BaseRest = require('./rest.js');
+const BaseRest = require('../rest.js');
 
 export default class PasswordList extends BaseRest {
 	async indexAction() {

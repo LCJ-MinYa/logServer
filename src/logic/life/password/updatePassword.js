@@ -1,4 +1,4 @@
-import CheckPassword from './class/checkPassword'
+import CheckPassword from '../class/checkPassword'
 
 export default class UpdataPassword extends CheckPassword {
     __before() {
