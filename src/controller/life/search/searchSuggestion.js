@@ -8,7 +8,10 @@ export default class extends BaseRest {
             const param = this.get();
             if (!param.wd) {
                 param.wd = '';
+            } else {
+                param.wd = encodeURI(param.wd);
             }
+            console.log(param.wd);
             let result = await HttpRequest.GetService('http://suggestion.baidu.com/su?ie=UTF-8&wd=' + param.wd);
             let jsonStr = Utils.getBetweenTwoStringContent(result.body, '[', ']', true);
             try {

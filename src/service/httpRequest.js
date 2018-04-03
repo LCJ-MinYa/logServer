@@ -11,11 +11,6 @@ export default class HttpRequest extends think.Service {
      * @param {[type]} data [description]
      */
     PostService(url, data) {
-        console.log("===========参数 开始===========");
-        console.log("接口地址URL: ", url);
-        console.log("接口请求类型: ", "POST");
-        console.log("接口参数数据: ", data);
-        console.log("===========参数 结束===========");
         if (think.isEmpty(url)) {
             console.log("URL不能为空!");
         } else {
@@ -32,11 +27,6 @@ export default class HttpRequest extends think.Service {
      * @param {...[type]} data [description]
      */
     GetService(url, ...data) {
-        console.log("===========参数 开始===========");
-        console.log("接口地址URL: ", url);
-        console.log("接口请求类型: ", "GET");
-        console.log("接口参数数据: ", data);
-        console.log("===========参数 结束===========");
         if (think.isEmpty(url)) {
             console.log("URL不能为空!");
         } else {
