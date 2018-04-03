@@ -1,3 +1,4 @@
+import Utils from '../../../utils/utils'
 const BaseRest = require('../rest.js');
 
 export default class extends BaseRest {
@@ -5,12 +6,13 @@ export default class extends BaseRest {
         if (this.isGet) {
             const HttpRequest = think.service('httpRequest');
             const param = this.get();
-            HttpRequest.GetService('http://suggestion.baidu.com/su', {
-                    wd: 'aa'
-                })
-                .then((result) => {
-                    console.log(result);
-                })
+            let result = await HttpRequest.GetService('http://suggestion.baidu.com/su?ie=UTF-8&wd=' + param.wd);
+            let jsonStr = Utils.getBetweenTwoStringContent(result.body, '[', ']', true);
+            try {
+                this.success(JSON.parse(jsonStr), '获取搜索建议文本成功');
+            } catch (err) {
+                this.fail(500, '解析搜索结果失败');
+            }
         }
     }
 }

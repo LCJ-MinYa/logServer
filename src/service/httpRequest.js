@@ -42,12 +42,10 @@ export default class HttpRequest extends think.Service {
         } else {
             let getPromisify = think.promisify(request.get);
             if (think.isEmpty(data)) {
-                console.log("API服务请求开始时间: ", new Date().valueOf());
                 return getPromisify({
                     url: url
                 });
             } else {
-                console.log("API服务请求开始时间: ", new Date().valueOf());
                 return getPromisify({
                     url: url,
                     form: data
