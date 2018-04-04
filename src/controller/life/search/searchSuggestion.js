@@ -11,11 +11,10 @@ export default class extends BaseRest {
             } else {
                 param.wd = encodeURI(param.wd);
             }
-            console.log(param.wd);
             let result = await HttpRequest.GetService('http://suggestion.baidu.com/su?ie=UTF-8&wd=' + param.wd);
             let jsonStr = Utils.getBetweenTwoStringContent(result.body, '[', ']', true);
             try {
-                let resultArr = JSON.parse(jsonStr);
+                let resultArr = JSON.parse(jsonStr.replace(/\\/g, ''));
                 for (let i = 0; i < resultArr.length; i++) {
                     resultArr[i] = {
                         value: resultArr[i]
@@ -23,6 +22,7 @@ export default class extends BaseRest {
                 }
                 this.success(resultArr, '获取搜索建议文本成功');
             } catch (err) {
+                console.log(err);
                 this.fail(500, '解析搜索结果失败');
             }
         }
