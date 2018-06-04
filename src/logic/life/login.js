@@ -1,6 +1,4 @@
-import {
-	matchEmail
-} from '../../utils/utils'
+import Utils from '../../utils/utils.js'
 
 module.exports = class extends think.Logic {
 	indexAction() {
@@ -10,7 +8,7 @@ module.exports = class extends think.Logic {
 				this.fail(400, '邮箱地址不能为空!');
 				return false;
 			}
-			if (!matchEmail(param.email)) {
+			if (!Utils.matchEmail(param.email)) {
 				this.fail(400, '请输入正确的邮箱地址!');
 				return false;
 			}
