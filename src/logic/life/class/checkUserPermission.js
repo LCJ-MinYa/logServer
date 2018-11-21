@@ -1,9 +1,9 @@
 export default class checkUserPermission extends think.Logic {
-    indexAction() {
+    __before() {
         if (this.isPost) {
             const param = this.post();
-            if (!param.uid) {
-                this.fail(400, '未获取到用户信息，请重新登陆!');
+            if (!param.uid || param.uid == 'undefined') {
+                this.fail(203, '未获取到用户信息，请重新登陆!');
                 return false;
             }
         }

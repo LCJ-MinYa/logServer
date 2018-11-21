@@ -1,4 +1,6 @@
-export default class CheckPassword extends think.Logic {
+import CheckUserPermission from './checkUserPermission';
+
+export default class CheckPassword extends CheckUserPermission {
     indexAction() {
         if (this.isPost) {
             const param = this.post();

@@ -1,7 +1,7 @@
 import CheckPassword from '../class/checkPassword'
 
 export default class UpdataPassword extends CheckPassword {
-    __before() {
+    __after() {
         if (this.isPost) {
             const param = this.post();
             if (!param._id) {

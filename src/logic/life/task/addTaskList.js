@@ -1,7 +1,7 @@
 import CheckUserPermission from '../class/checkUserPermission';
 
 export default class AddTaskList extends CheckUserPermission {
-    __before() {
+    indexAction() {
         if (this.isPost) {
             const param = this.post();
             if (!param.text) {
