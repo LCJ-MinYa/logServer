@@ -1,5 +1,5 @@
 // default config
 module.exports = {
-	workers: 1,
-	port: 8084
+    workers: 1,
+    port: 8084
 };

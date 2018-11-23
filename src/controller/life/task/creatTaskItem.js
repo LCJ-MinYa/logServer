@@ -1,6 +1,6 @@
 const BaseRest = require('../rest.js');
 
-export default class AddTaskList extends BaseRest {
+export default class CreatTaskItem extends BaseRest {
     async indexAction() {
         if (this.isPost) {
             const PasswordList = think.mongo('TaskList', 'mongoPassword');
@@ -8,14 +8,15 @@ export default class AddTaskList extends BaseRest {
             delete param.accessToken;
             let result = await PasswordList.where({
                 uid: param.uid,
-                text: param.text
+                title: param.title,
+                type: param.type
             }).thenAdd(param);
             if (result.type == 'add') {
                 this.success({
                     _id: result._id
-                }, '新增任务项目成功');
+                }, '项目新增任务成功');
             } else {
-                this.fail(401, '已存在相同任务项目名称');
+                this.fail(401, '任务项目中已存在相同任务名称');
             }
         }
     }
