@@ -3,7 +3,7 @@ const BaseRest = require('../rest.js');
 export default class CreatTaskItem extends BaseRest {
     async indexAction() {
         if (this.isPost) {
-            const PasswordList = think.mongo('TaskList', 'mongoPassword');
+            const PasswordList = think.mongo('TaskItem', 'mongoPassword');
             let param = this.post();
             delete param.accessToken;
             let result = await PasswordList.where({
