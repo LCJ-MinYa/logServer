@@ -8,7 +8,8 @@
         "test": "THINK_UNIT_TEST=1 nyc ava test/ && nyc report --reporter=html",
         "compile": "babel --no-babelrc src/ --presets think-node --out-dir app/",
         "lint": "eslint src/",
-        "lint-fix": "eslint --fix src/"
+        "lint-fix": "eslint --fix src/",
+        "apidoc": "apidoc -i src/ -o view/index"
     },
     "dependencies": {
         "koa-cors": "0.0.16",
