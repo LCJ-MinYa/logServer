@@ -3,12 +3,13 @@
     "version": "1.0.0",
     "description": "恣意游API接口文档",
     "title": "恣意游API",
-    "url": "https://api.ziyiu.com/",
+    "url": "https://api.ziyiu.com/life",
+    "sampleUrl": "https://api.ziyiu.com/life",
     "template": {
         "withGenerator": false
     },
     "footer": {
-        "title": "ziyiu footer",
-        "filename": "./apidoc/footer.md"
+        "title": "关于恣意游",
+        "filename": "./src/apidoc/footer.md"
     }
 }

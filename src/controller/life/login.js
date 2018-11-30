@@ -1,42 +1,41 @@
 const BaseRest = require('./rest.js');
 
 /**
- * @api {get} /test 接口测试
- * @apiDescription 根据ID（id）获取列表信息
- * @apiGroup test APIs
+ * @api {post} /login 用户登录
+ * @apiDescription 根据用户信息（email, password）登录恣意游
+ * @apiGroup loginGroup
  *
- * @apiParam {Number} id 任务ID
- * @apiParam {Number} [page] 页数
- * @apiParam {Number} [perpage] 每页的条数
+ * @apiParam {String} email 用户邮箱地址
+ * @apiParam {String} password 用户密码
+ * @apiUse baseUnLoginParams
  *
  * @apiParamExample {string} 请求参数格式:
- *    ?id=123&page=1&perpage=20
+ *	{
+ *	    "email": "ceshi@ziyiu.com",
+ *	    "password": "123456",
+ *	    "timestamp": 1543578242441,
+ *	    "accessToken": 'e2b06cd',
+ *	    "uid": ''
+ *	}
  *
  * @apiVersion 1.0.0
- * @apiErrorExample {json} 错误返回值:
- *     {
- *        "code": 10003,
- *        "msg": "ParametersError [Method]:get_tests参数错误!",
- *        "error": {
- *            "id": "",
- *            "page": "",
- *            "perpage": ""
- *        },
- *       "status": "fail"
- *     }
  * @apiSuccessExample {json} 正确返回值:
- *     {
- *   "code": 0,
- *   "msg": "OK ",
- *   "data": [
- *       {
- *           "id": "622051004185471233",
- *           "testCode": "000050",
- *       }
- *   ],
- *   "status": "ok",
- *   "count": "14"
- *   }
+ *	{
+ *	    "data": {
+ *	        "uid": "5c097013-3d8a-482f-8131-50a833983175",
+ *	        "userName": "123",
+ *	    },
+ *	    "errno": 0,
+ *	    "errmsg": "登录成功"
+ *	}
+ * @apiErrorExample {json} 错误返回值:
+ *	{
+ *		"errno": 401,
+ *		"errmsg": "用户名或密码错误!"
+ *	}
+ *  @apiUse CODE_REFUSE_401
+ *  @apiUse CODE_METHOD_GET_403
+ *  @apiUse CODE_METHOD_POST_403
  */
 export default class Login extends BaseRest {
 	async indexAction() {
