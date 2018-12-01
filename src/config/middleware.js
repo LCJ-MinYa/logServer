@@ -13,7 +13,7 @@ module.exports = [{
         enable: true,
         options: {
             root: path.join(think.ROOT_PATH, 'view/index/'),
-            //publicPath: /^\/(static|favicon\.ico)/
+            publicPath: /^\/(main\.js|api_data\.js|api_project\.js|css|fonts|img|utils|vendor|locales|favicon\.ico)/
         }
     }, {
         handle: 'trace',
