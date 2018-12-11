@@ -40,7 +40,7 @@ exports.model = {
     },
     mongo: {
         host: '0.0.0.0',
-        port: '8000',
+        port: '',
         user: '',
         password: '',
         database: 'chat',
@@ -48,7 +48,7 @@ exports.model = {
     },
     mongoPassword: {
         host: '0.0.0.0',
-        port: '8000',
+        port: '',
         user: '',
         password: '',
         database: 'shy',
