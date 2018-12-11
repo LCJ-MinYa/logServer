@@ -39,7 +39,7 @@ exports.model = {
         logger: msg => think.logger.info(msg)
     },
     mongo: {
-        host: '106.15.193.97',
+        host: '',
         port: '9000',
         user: '',
         password: '',
@@ -47,7 +47,7 @@ exports.model = {
         prefix: '',
     },
     mongoPassword: {
-        host: '106.15.193.97',
+        host: '',
         port: '9000',
         user: '',
         password: '',
