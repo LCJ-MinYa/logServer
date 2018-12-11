@@ -31,7 +31,6 @@ exports.cache = {
  * model adapter config
  * @type {Object}
  */
-//mongo对应配置
 exports.model = {
     type: 'mongo',
     common: {
@@ -39,6 +38,7 @@ exports.model = {
         logSql: isDev,
         logger: msg => think.logger.info(msg)
     },
+    //#smudge
 };
 
 /**
