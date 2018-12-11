@@ -38,6 +38,7 @@ exports.model = {
         logSql: isDev,
         logger: msg => think.logger.info(msg)
     },
+    //mongo对应配置
 };
 
 /**
