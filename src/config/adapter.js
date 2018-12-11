@@ -38,9 +38,10 @@ exports.model = {
         logSql: isDev,
         logger: msg => think.logger.info(msg)
     },
+    //#BEGIN
     mongo: {
         host: '0.0.0.0',
-        port: '',
+        port: '9000',
         user: '',
         password: '',
         database: 'chat',
@@ -48,12 +49,13 @@ exports.model = {
     },
     mongoPassword: {
         host: '0.0.0.0',
-        port: '',
+        port: '9000',
         user: '',
         password: '',
         database: 'shy',
         prefix: '',
     }
+    //#END
 };
 
 /**
