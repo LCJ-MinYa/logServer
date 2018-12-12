@@ -4,6 +4,7 @@ const BaseRest = require('../rest.js');
  * @api {post} /password/passwordList 获取密码存储列表
  * @apiDescription 根据密码类型（type）获取密码存储列表
  * @apiGroup passwordGroup
+ * @apiVersion 1.0.0
  *
  * @apiParam {String} type 密码类型
  * @apiUse baseHasLoginParams
@@ -16,20 +17,31 @@ const BaseRest = require('../rest.js');
  *	    "uid": 'user-uid'
  *	}
  *
- * @apiVersion 1.0.0
+ * @apiUse baseSuccessParams
+ * @apiSuccess {String} data._id 密码存储id
+ * @apiSuccess {String} data.userName 用户名
+ * @apiSuccess {String} data.importance 重要性
+ * @apiSuccess {String} data.notes 备注
+ * @apiSuccess {String} data.password 密码
+ * @apiSuccess {String} data.timestamp 创建时间
+ * @apiSuccess {String} data.title 标题
+ * @apiSuccess {String} data.type 密码类型
+ * @apiSuccess {String} data.uid 用户uid
+ * @apiSuccess {String} data.url 密码所属网站
+ *
  * @apiSuccessExample {json} 正确返回值:
  *	{
  *	    "data": [{
  *	        "_id": "_id",
- *	        "userName": "userName", //用户名
- *	        "importance": "importance", //重要性
- *	        "notes": "notes", //备注
- *	        "password": "password", //密码
- *	        "timestamp": "timestamp", //创建时间
- *	        "title": "title", //标题
- *	        "type": "type", //密码类型
- *	        "uid": "uid", //用户uid
- *	        "url": "url", //密码所属网站
+ *	        "userName": "userName",
+ *	        "importance": "importance",
+ *	        "notes": "notes",
+ *	        "password": "password",
+ *	        "timestamp": "timestamp",
+ *	        "title": "title",
+ *	        "type": "type",
+ *	        "uid": "uid",
+ *	        "url": "url",
  *	    }],
  *	    "errno": 0,
  *	    "errmsg": "获取密码列表成功"

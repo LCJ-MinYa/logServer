@@ -33,6 +33,13 @@
  */
 
 /**
+ * @apiDefine baseSuccessParams 请求成功返回信息
+ * @apiSuccess {Number} errno 返回状态码
+ * @apiSuccess {String} errmsg 返回信息
+ * @apiSuccess {Object} data 返回对象数据
+ */
+
+/**
  * @apiDefine CODE_REFUSE_401 非法请求
  * @apiErrorExample {json} 非法请求401
  *  {
