@@ -38,8 +38,7 @@ exports.model = {
         logSql: isDev,
         logger: msg => think.logger.info(msg)
     },
-    //test
-    //#smudge
+    //#smudge mongodb配置
 };
 
 /**
