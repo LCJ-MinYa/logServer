@@ -18,6 +18,12 @@ const BaseRest = require('../rest.js');
  * @apiParamExample {string} 请求参数格式:
  *	{
  *	    "type": "social",
+ *	    "title": "title",
+ *	    "url": "url",
+ *	    "userName": "userName",
+ *	    "password": "password",
+ *	    "importance": "importance",
+ *	    "notes": "notes",
  *	    "timestamp": 1543578242441,
  *	    "accessToken": 'e2b06cd',
  *	    "uid": 'user-uid'
@@ -32,7 +38,7 @@ const BaseRest = require('../rest.js');
  *	        "_id": "_id"
  *	    }],
  *	    "errno": 0,
- *	    "errmsg": "获取密码列表成功"
+ *	    "errmsg": "创建密码列表成功"
  *	}
  *  @apiUse CODE_UID_203
  *  @apiUse CODE_REFUSE_401
