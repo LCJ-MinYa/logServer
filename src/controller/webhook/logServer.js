@@ -1,4 +1,9 @@
 const BaseRest = require('./rest.js');
+const createHandler = require('github-webhook-handler');
+const handler = createHandler({
+    path: '/webhook/logServer',
+    secret: 'myhashsecret'
+})
 
 /**
  * @api {post} /webhook/logServer logServer自动部署
@@ -30,10 +35,15 @@ const BaseRest = require('./rest.js');
  */
 export default class LogServerWebHook extends BaseRest {
     async indexAction() {
-        console.log('==========this==========');
-        console.log(this);
-        console.log('==========post==========');
-        console.log(this.post());
+        console.log(handler);
+        handler.on('push', function(event) {
+            console.log('Received a push event for %s to %s',
+                event.payload.repository.name,
+                event.payload.ref)
+        });
+
+        console.log('==========header==========');
+        console.log(this.header());
         console.log('==========结束==========');
         this.success({}, '触发成功');
     }
