@@ -33,7 +33,8 @@ export default class LogServerWebHook extends BaseRest {
         console.log('==========开始==========');
         console.log(this.ip);
         console.log((this.userAgent || '').toLowerCase());
-        console.log(this.header('X-Hub-Signature'));
+        console.log(this.ctx.headers);
+        console.log(this.ctx.request._body);
         console.log('==========结束==========');
         this.success({}, '触发成功');
     }
