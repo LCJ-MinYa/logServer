@@ -35,10 +35,8 @@ export default class LogServerWebHook extends BaseRest {
         console.log(this.ip);
         console.log((this.userAgent || '').toLowerCase());
         console.log(this.ctx.headers);
-        console.log(this.ctx.request.body);
         console.log(this.post());
-        console.log(crypto.createHmac('sha1', 'aw5548..').update(JSON.stringify(this.ctx.request.body)).digest().toString('hex'));
-        console.log(crypto.createHmac('sha1', 'aw5548..').update(JSON.stringify(this.post())).digest().toString('hex'));
+        console.log(crypto.createHmac('sha1', '').update(JSON.stringify(this.post())).digest().toString('hex'));
         console.log('==========结束==========');
         this.success({}, '触发成功');
     }
