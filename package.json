@@ -13,7 +13,6 @@
         "apidoc": "apidoc -i src/ -o view/index"
     },
     "dependencies": {
-        "github-webhook-handler": "^0.7.1",
         "koa-cors": "0.0.16",
         "request": "^2.85.0",
         "think-cache": "^1.0.0",
