@@ -34,7 +34,7 @@ export default class LogServerWebHook extends BaseRest {
         console.log(this.ip);
         console.log((this.userAgent || '').toLowerCase());
         console.log(this.ctx.headers);
-        console.log(this.ctx.request._body);
+        console.log(this.ctx.req._body);
         console.log('==========结束==========');
         this.success({}, '触发成功');
     }
