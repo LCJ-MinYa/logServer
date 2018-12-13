@@ -2,7 +2,7 @@ import Utils from '../../../utils/utils'
 const BaseRest = require('../rest.js');
 
 /**
- * @api {get} /search/searchSuggestion 导航关键字搜索
+ * @api {get} /life/search/searchSuggestion 导航关键字搜索
  * @apiDescription 根据用户输入的关键字（wd）返回百度结果
  * @apiGroup searchGroup
  *

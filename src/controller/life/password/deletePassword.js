@@ -1,7 +1,7 @@
 const BaseRest = require('../rest.js');
 
 /**
- * @api {post} /password/deletePassword 删除密码
+ * @api {post} /life/password/deletePassword 删除密码
  * @apiDescription 删除当前选中{_id}的密码信息
  * @apiGroup passwordGroup
  * @apiVersion 1.0.0

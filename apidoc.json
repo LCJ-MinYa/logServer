@@ -3,8 +3,8 @@
     "version": "1.0.0",
     "description": "恣意游API接口文档",
     "title": "恣意游API",
-    "url": "https://api.ziyiu.com/life",
-    "sampleUrl": "https://api.ziyiu.com/life",
+    "url": "https://api.ziyiu.com",
+    "sampleUrl": "https://api.ziyiu.com",
     "template": {
         "withGenerator": false
     },

@@ -19,6 +19,10 @@
  */
 
 /**
+ * @apiDefine webhookGroup 自动部署
+ */
+
+/**
  * @apiDefine baseHasLoginParams 已登录公用请求参数
  * @apiParam {Date}   timestamp 请求时间戳
  * @apiParam {String} accessToken 请求验证token

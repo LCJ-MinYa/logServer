@@ -1,7 +1,7 @@
 const BaseRest = require('../rest.js');
 
 /**
- * @api {post} /password/creatPassword 创建密码
+ * @api {post} /life/password/creatPassword 创建密码
  * @apiDescription 根据密码信息创建密码
  * @apiGroup passwordGroup
  * @apiVersion 1.0.0

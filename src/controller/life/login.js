@@ -1,7 +1,7 @@
 const BaseRest = require('./rest.js');
 
 /**
- * @api {post} /login 用户登录
+ * @api {post} /life/login 用户登录
  * @apiDescription 根据用户信息（email, password）登录恣意游
  * @apiGroup loginGroup
  *
