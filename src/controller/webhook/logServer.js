@@ -31,7 +31,7 @@ const BaseRest = require('./rest.js');
 export default class LogServerWebHook extends BaseRest {
     async indexAction() {
         console.log('==========header==========');
-        console.log(this.ctx);
+        console.log(this.ctx.req);
         console.log('==========结束==========');
         this.success({}, '触发成功');
     }
