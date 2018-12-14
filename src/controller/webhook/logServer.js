@@ -1,4 +1,5 @@
 const BaseRest = require('./rest.js');
+const exec = require('child_process').exec;
 import Utils from '../../utils/utils';
 import {
     model
@@ -34,8 +35,6 @@ export default class LogServerWebHook extends BaseRest {
     async indexAction() {
         if (this.isPost) {
             const headers = this.ctx.headers;
-            console.log(headers);
-            console.log(headers['user-agent']);
             if (headers['user-agent'] != 'GitHub-Hookshot/3c05c9b') {
                 this.fail(401, '非法的请求头!');
                 return false;
@@ -44,13 +43,23 @@ export default class LogServerWebHook extends BaseRest {
                 this.fail(401, '非push触发!');
                 return false;
             }
-            const sha1Secret = 'sha1=' + Utils(model.logServerWebhookSecret, this.post());
+            const sha1Secret = 'sha1=' + Utils.sha1Secret(model.logServerWebhookSecret, this.post());
             console.log(sha1Secret);
             if (headers['x-hub-signature'] != sha1Secret) {
                 this.fail(401, '非法的密钥!');
                 return false;
             }
-            this.success({}, '触发成功');
+
+            const cmdStr = "sh -x /root/www/logServer/deploy.sh";
+            exec(cmdStr, (err, result) => {
+                if (err) {
+                    this.fail(500, '服务器自动部署失败!');
+                    process.exit();
+                }
+
+                this.success({}, '服务器自动部署成功');
+                process.exit();
+            })
         }
     }
 }
