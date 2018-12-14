@@ -37,27 +37,23 @@ export default class LogServerWebHook extends BaseRest {
             const headers = this.ctx.headers;
             if (headers['user-agent'] != 'GitHub-Hookshot/3c05c9b') {
                 this.fail(401, '非法的请求头!');
-                return false;
             }
             if (headers['x-github-event'] != 'push') {
                 this.fail(401, '非push触发!');
-                return false;
             }
             const sha1Secret = 'sha1=' + Utils.sha1Secret(model.logServerWebhookSecret, this.post());
             console.log(sha1Secret);
             if (headers['x-hub-signature'] != sha1Secret) {
                 this.fail(401, '非法的密钥!');
-                return false;
             }
 
             const cmdStr = "sh -x /root/www/logServer/deploy.sh";
             exec(cmdStr, (err, result) => {
                 if (err) {
-                    this.fail(500, '服务器自动部署失败!');
+                    console.log(err);
                     process.exit();
                 }
-
-                this.success({}, '服务器自动部署成功');
+                console.log('执行成功');
                 process.exit();
             })
         }
