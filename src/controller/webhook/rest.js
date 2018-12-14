@@ -13,10 +13,10 @@ module.exports = class extends think.Controller {
         const param = this.isGet ? this.get() : this.post();
 
         if (this.isGet) {
-            this.fail(403, '请求不支持GET方法！');
+            //this.fail(403, '请求不支持GET方法！');
         }
         if (this.isPost) {
-            this.fail(403, '请求不支持POST方法！');
+            //this.fail(403, '请求不支持POST方法！');
         }
     }
     /**
