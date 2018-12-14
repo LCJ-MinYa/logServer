@@ -1,13 +1,11 @@
-import CheckUserPermission from '../class/checkUserPermission';
+import CheckPostReq from '../class/checkPostReq';
 
-export default class AddTaskList extends CheckUserPermission {
+export default class AddTaskList extends CheckPostReq {
     indexAction() {
-        if (this.isPost) {
-            const param = this.post();
-            if (!param.text) {
-                this.fail(400, '项目名称不能为空!');
-                return false;
-            }
+        const param = this.post();
+        if (!param.text) {
+            this.fail(400, '项目名称不能为空!');
+            return false;
         }
     }
 }

@@ -55,28 +55,28 @@ exports.default = class extends BaseRest {
         var _this = this;
 
         return _asyncToGenerator(function* () {
-            if (_this.isGet) {
-                const HttpRequest = think.service('httpRequest');
-                const param = _this.get();
-                if (!param.wd) {
-                    param.wd = '';
-                } else {
-                    param.wd = encodeURI(param.wd);
+            const HttpRequest = think.service('httpRequest');
+            const param = _this.get();
+            if (!param.wd) {
+                param.wd = '';
+            } else {
+                param.wd = encodeURI(param.wd);
+            }
+            let result = yield HttpRequest.GetService('http://suggestion.baidu.com/su?ie=UTF-8&wd=' + param.wd);
+            let jsonStr = _utils2.default.getBetweenTwoStringContent(result.body, '[', ']', true);
+            try {
+                let resultArr = JSON.parse(jsonStr.replace(/\\/g, ''));
+                for (let i = 0; i < resultArr.length; i++) {
+                    resultArr[i] = {
+                        value: resultArr[i]
+                    };
                 }
-                let result = yield HttpRequest.GetService('http://suggestion.baidu.com/su?ie=UTF-8&wd=' + param.wd);
-                let jsonStr = _utils2.default.getBetweenTwoStringContent(result.body, '[', ']', true);
-                try {
-                    let resultArr = JSON.parse(jsonStr.replace(/\\/g, ''));
-                    for (let i = 0; i < resultArr.length; i++) {
-                        resultArr[i] = {
-                            value: resultArr[i]
-                        };
-                    }
-                    _this.success(resultArr, '获取搜索建议文本成功');
-                } catch (err) {
-                    console.log(err);
-                    _this.fail(500, '解析搜索结果失败');
-                }
+                _this.success(resultArr, '获取搜索建议文本成功');
+                return false;
+            } catch (err) {
+                console.log(err);
+                _this.fail(500, '解析搜索结果失败');
+                return false;
             }
         })();
     }

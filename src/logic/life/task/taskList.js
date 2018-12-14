@@ -1,5 +1,5 @@
-import CheckUserPermission from '../class/checkUserPermission';
+import CheckPostReq from '../class/checkPostReq';
 
-export default class TaskList extends CheckUserPermission {
+export default class TaskList extends CheckPostReq {
 
 }

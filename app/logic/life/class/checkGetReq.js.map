@@ -1,0 +1,22 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../../src/logic/life/class/checkGetReq.js"
+    ],
+    "names": [
+        "CheckPostReq",
+        "__before",
+        "isPost",
+        "fail",
+        "isGet",
+        "param",
+        "get",
+        "shouldLogin",
+        "verifyAccessToken"
+    ],
+    "mappings": ";;AAAA;;;;;;AAEe,MAAMA,YAAN,uCAA+C;AAC1DC,eAAW;AACP,YAAI,KAAKC,MAAT,EAAiB;AACb,iBAAKC,IAAL,CAAU,GAAV,EAAe,cAAf;AACA,mBAAO,KAAP;AACH;AACD,YAAI,KAAKC,KAAT,EAAgB;AACZ,kBAAMC,QAAQ,KAAKC,GAAL,EAAd;AACA,gBAAI,KAAKC,WAAL,CAAiBF,KAAjB,MAA4B,KAAhC,EAAuC;AACnC,uBAAO,KAAP;AACH;AACD,gBAAI,KAAKG,iBAAL,CAAuBH,KAAvB,MAAkC,KAAtC,EAA6C;AACzC,uBAAO,KAAP;AACH;AACJ;AACJ;AAfyD;kBAAzCL,Y",
+    "file": "../../../../src/logic/life/class/checkGetReq.js",
+    "sourcesContent": [
+        "import CheckUserPermission from './checkUserPermission';\n\nexport default class CheckPostReq extends CheckUserPermission {\n    __before() {\n        if (this.isPost) {\n            this.fail(403, '请求不支持POST方法！');\n            return false;\n        }\n        if (this.isGet) {\n            const param = this.get();\n            if (this.shouldLogin(param) === false) {\n                return false;\n            }\n            if (this.verifyAccessToken(param) === false) {\n                return false;\n            }\n        }\n    }\n}"
+    ]
+}

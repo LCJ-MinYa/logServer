@@ -7,16 +7,21 @@
         "checkUserPermission",
         "think",
         "Logic",
-        "__before",
-        "isPost",
+        "constructor",
+        "ctx",
+        "shouldLogin",
         "param",
-        "post",
         "uid",
-        "fail"
+        "fail",
+        "verifyAccessToken",
+        "accessToken",
+        "sha1",
+        "timestamp",
+        "substring"
     ],
-    "mappings": ";AAAe,MAAMA,mBAAN,SAAkCC,MAAMC,KAAxC,CAA8C;AACzDC,eAAW;AACP,YAAI,KAAKC,MAAT,EAAiB;AACb,kBAAMC,QAAQ,KAAKC,IAAL,EAAd;AACA,gBAAI,CAACD,MAAME,GAAP,IAAcF,MAAME,GAAN,IAAa,WAA/B,EAA4C;AACxC,qBAAKC,IAAL,CAAU,GAAV,EAAe,iBAAf;AACA,uBAAO,KAAP;AACH;AACJ;AACJ;AATwD;kBAAxCR,mB",
+    "mappings": ";;AAAA;;;;;;AAEe,MAAMA,mBAAN,SAAkCC,MAAMC,KAAxC,CAA8C;AACzDC,gBAAYC,GAAZ,EAAiB;AACb,cAAMA,GAAN;AACAA,YAAIC,WAAJ,GAAkB,IAAlB;AACH;AACDA,gBAAYC,KAAZ,EAAmB;AACf,YAAI,KAAKF,GAAL,CAASC,WAAb,EAA0B;AACtB,gBAAI,CAACC,MAAMC,GAAP,IAAcD,MAAMC,GAAN,IAAa,WAA/B,EAA4C;AACxC,qBAAKC,IAAL,CAAU,GAAV,EAAe,iBAAf;AACA,uBAAO,KAAP;AACH;AACJ;AACJ;AACDC,sBAAkBH,KAAlB,EAAyB;AACrB,YAAIA,MAAMI,WAAV,EAAuB;AACnB;AACA;AACA;AACA;AACA;AACA,gBAAIJ,MAAMI,WAAN,KAAsB,cAAOC,IAAP,CAAYL,MAAMC,GAAN,GAAYD,MAAMM,SAA9B,EAAyCC,SAAzC,CAAmD,CAAnD,EAAsD,EAAtD,CAA1B,EAAqF;AACjF,qBAAKL,IAAL,CAAU,GAAV,EAAe,gBAAf;AACA,uBAAO,KAAP;AACH;AACJ,SAVD,MAUO;AACH,iBAAKA,IAAL,CAAU,GAAV,EAAe,gBAAf;AACA,mBAAO,KAAP;AACH;AACJ;AA5BwD;kBAAxCR,mB",
     "file": "../../../../src/logic/life/class/checkUserPermission.js",
     "sourcesContent": [
-        "export default class checkUserPermission extends think.Logic {\n    __before() {\n        if (this.isPost) {\n            const param = this.post();\n            if (!param.uid || param.uid == 'undefined') {\n                this.fail(203, '未获取到用户信息，请重新登陆!');\n                return false;\n            }\n        }\n    }\n}"
+        "import encryp from '../../../utils/sha1';\n\nexport default class checkUserPermission extends think.Logic {\n    constructor(ctx) {\n        super(ctx);\n        ctx.shouldLogin = true;\n    }\n    shouldLogin(param) {\n        if (this.ctx.shouldLogin) {\n            if (!param.uid || param.uid == 'undefined') {\n                this.fail(203, '未获取到用户信息，请重新登陆!');\n                return false;\n            }\n        }\n    }\n    verifyAccessToken(param) {\n        if (param.accessToken) {\n            // if (param.timestamp) {\n            //     let newTimestamp = new Date().getTime();\n            //     let oldTimestamp;\n            //     console.log('这里需要判断请求的时间是否在一分钟之内，防止过期请求,同时过滤来自api.ziyiu.com允许测试api过期请求');\n            // }\n            if (param.accessToken !== encryp.sha1(param.uid + param.timestamp).substring(3, 10)) {\n                this.fail(401, '瞎请求干啥，心疼我的服务器!');\n                return false;\n            }\n        } else {\n            this.fail(401, '瞎请求干啥，心疼我的服务器!');\n            return false;\n        }\n    }\n}"
     ]
 }

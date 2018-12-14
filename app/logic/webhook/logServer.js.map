@@ -5,13 +5,11 @@
     ],
     "names": [
         "LogServerWebHook",
-        "think",
-        "Logic",
         "indexAction"
     ],
-    "mappings": ";AAAe,MAAMA,gBAAN,SAA+BC,MAAMC,KAArC,CAA2C;AACtDC,kBAAc,CAEb;AAHqD;kBAArCH,gB",
+    "mappings": ";;AAAA;;;;;;AAEe,MAAMA,gBAAN,gCAA4C;AACvDC,kBAAc,CAEb;AAHsD;kBAAtCD,gB",
     "file": "../../../src/logic/webhook/logServer.js",
     "sourcesContent": [
-        "export default class LogServerWebHook extends think.Logic {\n    indexAction() {\n\n    }\n}"
+        "import CheckPostReq from './class/checkPostReq';\n\nexport default class LogServerWebHook extends CheckPostReq {\n    indexAction() {\n\n    }\n}"
     ]
 }

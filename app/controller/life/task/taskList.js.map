@@ -8,7 +8,6 @@
         "require",
         "TaskList",
         "indexAction",
-        "isPost",
         "PasswordList",
         "think",
         "mongo",
@@ -21,9 +20,9 @@
         "select",
         "success"
     ],
-    "mappings": ";;;;AAAA,MAAMA,WAAWC,QAAQ,YAAR,CAAjB;;AAEe,MAAMC,QAAN,SAAuBF,QAAvB,CAAgC;AACrCG,eAAN,GAAoB;AAAA;;AAAA;AAChB,gBAAI,MAAKC,MAAT,EAAiB;AACb,sBAAMC,eAAeC,MAAMC,KAAN,CAAY,UAAZ,EAAwB,eAAxB,CAArB;AACA,oBAAIC,QAAQ,MAAKC,IAAL,EAAZ;AACA,oBAAIC,SAAS,MAAML,aAAaM,KAAb,CAAmB;AAClCC,yBAAKJ,MAAMI;AADuB,iBAAnB,EAEhBC,KAFgB,CAEV,WAFU,EAEGC,MAFH,EAAnB;AAGA,sBAAKC,OAAL,CAAaL,MAAb,EAAqB,YAArB;AACH;AARe;AASnB;AAV0C;kBAA1BR,Q",
+    "mappings": ";;;;AAAA,MAAMA,WAAWC,QAAQ,YAAR,CAAjB;;AAEe,MAAMC,QAAN,SAAuBF,QAAvB,CAAgC;AACrCG,eAAN,GAAoB;AAAA;;AAAA;AAChB,kBAAMC,eAAeC,MAAMC,KAAN,CAAY,UAAZ,EAAwB,eAAxB,CAArB;AACA,gBAAIC,QAAQ,MAAKC,IAAL,EAAZ;AACA,gBAAIC,SAAS,MAAML,aAAaM,KAAb,CAAmB;AAClCC,qBAAKJ,MAAMI;AADuB,aAAnB,EAEhBC,KAFgB,CAEV,WAFU,EAEGC,MAFH,EAAnB;AAGA,kBAAKC,OAAL,CAAaL,MAAb,EAAqB,YAArB;AACA,mBAAO,KAAP;AAPgB;AAQnB;AAT0C;kBAA1BP,Q",
     "file": "../../../../src/controller/life/task/taskList.js",
     "sourcesContent": [
-        "const BaseRest = require('../rest.js');\n\nexport default class TaskList extends BaseRest {\n    async indexAction() {\n        if (this.isPost) {\n            const PasswordList = think.mongo('TaskList', 'mongoPassword');\n            let param = this.post();\n            let result = await PasswordList.where({\n                uid: param.uid\n            }).order('timestamp').select();\n            this.success(result, '获取任务项目列表成功');\n        }\n    }\n}"
+        "const BaseRest = require('../rest.js');\n\nexport default class TaskList extends BaseRest {\n    async indexAction() {\n        const PasswordList = think.mongo('TaskList', 'mongoPassword');\n        let param = this.post();\n        let result = await PasswordList.where({\n            uid: param.uid\n        }).order('timestamp').select();\n        this.success(result, '获取任务项目列表成功');\n        return false;\n    }\n}"
     ]
 }

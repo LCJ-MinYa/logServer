@@ -6,15 +6,14 @@
     "names": [
         "AddTaskList",
         "indexAction",
-        "isPost",
         "param",
         "post",
         "text",
         "fail"
     ],
-    "mappings": ";;AAAA;;;;;;AAEe,MAAMA,WAAN,uCAA8C;AACzDC,kBAAc;AACV,YAAI,KAAKC,MAAT,EAAiB;AACb,kBAAMC,QAAQ,KAAKC,IAAL,EAAd;AACA,gBAAI,CAACD,MAAME,IAAX,EAAiB;AACb,qBAAKC,IAAL,CAAU,GAAV,EAAe,WAAf;AACA,uBAAO,KAAP;AACH;AACJ;AACJ;AATwD;kBAAxCN,W",
+    "mappings": ";;AAAA;;;;;;AAEe,MAAMA,WAAN,gCAAuC;AAClDC,kBAAc;AACV,cAAMC,QAAQ,KAAKC,IAAL,EAAd;AACA,YAAI,CAACD,MAAME,IAAX,EAAiB;AACb,iBAAKC,IAAL,CAAU,GAAV,EAAe,WAAf;AACA,mBAAO,KAAP;AACH;AACJ;AAPiD;kBAAjCL,W",
     "file": "../../../../src/logic/life/task/addTaskList.js",
     "sourcesContent": [
-        "import CheckUserPermission from '../class/checkUserPermission';\n\nexport default class AddTaskList extends CheckUserPermission {\n    indexAction() {\n        if (this.isPost) {\n            const param = this.post();\n            if (!param.text) {\n                this.fail(400, '项目名称不能为空!');\n                return false;\n            }\n        }\n    }\n}"
+        "import CheckPostReq from '../class/checkPostReq';\n\nexport default class AddTaskList extends CheckPostReq {\n    indexAction() {\n        const param = this.post();\n        if (!param.text) {\n            this.fail(400, '项目名称不能为空!');\n            return false;\n        }\n    }\n}"
     ]
 }

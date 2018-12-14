@@ -6,16 +6,15 @@
     "names": [
         "CreatTaskItem",
         "indexAction",
-        "isPost",
         "param",
         "post",
         "title",
         "fail",
         "type"
     ],
-    "mappings": ";;AAAA;;;;;;AAEe,MAAMA,aAAN,uCAAgD;AAC3DC,kBAAc;AACV,YAAI,KAAKC,MAAT,EAAiB;AACb,kBAAMC,QAAQ,KAAKC,IAAL,EAAd;AACA,gBAAI,CAACD,MAAME,KAAX,EAAkB;AACd,qBAAKC,IAAL,CAAU,GAAV,EAAe,WAAf;AACA,uBAAO,KAAP;AACH;AACD,gBAAI,CAACH,MAAMI,IAAX,EAAiB;AACb,qBAAKD,IAAL,CAAU,GAAV,EAAe,WAAf;AACA,uBAAO,KAAP;AACH;AACJ;AACJ;AAb0D;kBAA1CN,a",
+    "mappings": ";;AAAA;;;;;;AAEe,MAAMA,aAAN,gCAAyC;AACpDC,kBAAc;AACV,cAAMC,QAAQ,KAAKC,IAAL,EAAd;AACA,YAAI,CAACD,MAAME,KAAX,EAAkB;AACd,iBAAKC,IAAL,CAAU,GAAV,EAAe,WAAf;AACA,mBAAO,KAAP;AACH;AACD,YAAI,CAACH,MAAMI,IAAX,EAAiB;AACb,iBAAKD,IAAL,CAAU,GAAV,EAAe,WAAf;AACA,mBAAO,KAAP;AACH;AACJ;AAXmD;kBAAnCL,a",
     "file": "../../../../src/logic/life/task/creatTaskItem.js",
     "sourcesContent": [
-        "import CheckUserPermission from '../class/checkUserPermission';\n\nexport default class CreatTaskItem extends CheckUserPermission {\n    indexAction() {\n        if (this.isPost) {\n            const param = this.post();\n            if (!param.title) {\n                this.fail(400, '任务名称不能为空!');\n                return false;\n            }\n            if (!param.type) {\n                this.fail(400, '所属项目不能为空!');\n                return false;\n            }\n        }\n    }\n}"
+        "import CheckPostReq from '../class/checkPostReq';\n\nexport default class CreatTaskItem extends CheckPostReq {\n    indexAction() {\n        const param = this.post();\n        if (!param.title) {\n            this.fail(400, '任务名称不能为空!');\n            return false;\n        }\n        if (!param.type) {\n            this.fail(400, '所属项目不能为空!');\n            return false;\n        }\n    }\n}"
     ]
 }

@@ -46,24 +46,24 @@ class Login extends BaseRest {
     var _this = this;
 
     return _asyncToGenerator(function* () {
-      if (_this.isPost) {
-        const param = _this.post();
-        const User = think.mongo('User');
-        const result = yield User.where({
-          email: param.email
-        }).select();
-        if (result.length !== 0) {
-          if (result[0].password == param.password) {
-            _this.success({
-              uid: result[0].uid,
-              userName: result[0].userName
-            }, '登录成功');
-          } else {
-            _this.fail(401, '用户名或密码错误!');
-          }
+      const param = _this.post();
+      const User = think.mongo('User');
+      const result = yield User.where({
+        email: param.email
+      }).select();
+      if (result.length !== 0) {
+        if (result[0].password == param.password) {
+          _this.success({
+            uid: result[0].uid,
+            userName: result[0].userName
+          }, '登录成功');
         } else {
           _this.fail(401, '用户名或密码错误!');
+          return false;
         }
+      } else {
+        _this.fail(401, '用户名或密码错误!');
+        return false;
       }
     })();
   }

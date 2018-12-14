@@ -1,4 +1,6 @@
-export default class LogServerWebHook extends think.Logic {
+import CheckPostReq from './class/checkPostReq';
+
+export default class LogServerWebHook extends CheckPostReq {
     indexAction() {
 
     }

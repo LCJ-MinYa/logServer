@@ -4,12 +4,13 @@
         "../../../../src/logic/life/search/searchSuggestion.js"
     ],
     "names": [
-        "think",
-        "Logic"
+        "constructor",
+        "ctx",
+        "shouldLogin"
     ],
-    "mappings": ";kBAAe,cAAcA,MAAMC,KAApB,CAA0B,E",
+    "mappings": ";;AAAA;;;;;;kBAEe,oCAA0B;AACrCA,gBAAYC,GAAZ,EAAiB;AACb,cAAMA,GAAN;AACAA,YAAIC,WAAJ,GAAkB,KAAlB;AACH;AAJoC,C",
     "file": "../../../../src/logic/life/search/searchSuggestion.js",
     "sourcesContent": [
-        "export default class extends think.Logic {\n\n}"
+        "import CheckGetReq from '../class/checkGetReq';\n\nexport default class extends CheckGetReq {\n    constructor(ctx) {\n        super(ctx);\n        ctx.shouldLogin = false;\n    }\n}"
     ]
 }

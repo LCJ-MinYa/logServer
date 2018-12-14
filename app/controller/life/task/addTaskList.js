@@ -9,21 +9,21 @@ class AddTaskList extends BaseRest {
         var _this = this;
 
         return _asyncToGenerator(function* () {
-            if (_this.isPost) {
-                const PasswordList = think.mongo('TaskList', 'mongoPassword');
-                let param = _this.post();
-                delete param.accessToken;
-                let result = yield PasswordList.where({
-                    uid: param.uid,
-                    text: param.text
-                }).thenAdd(param);
-                if (result.type == 'add') {
-                    _this.success({
-                        _id: result._id
-                    }, '新增任务项目成功');
-                } else {
-                    _this.fail(401, '已存在相同任务项目名称');
-                }
+            const PasswordList = think.mongo('TaskList', 'mongoPassword');
+            let param = _this.post();
+            delete param.accessToken;
+            let result = yield PasswordList.where({
+                uid: param.uid,
+                text: param.text
+            }).thenAdd(param);
+            if (result.type == 'add') {
+                _this.success({
+                    _id: result._id
+                }, '新增任务项目成功');
+                return false;
+            } else {
+                _this.fail(401, '已存在相同任务项目名称');
+                return false;
             }
         })();
     }

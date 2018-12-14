@@ -43,28 +43,28 @@ const BaseRest = require('../rest.js');
 
 export default class extends BaseRest {
     async indexAction() {
-        if (this.isGet) {
-            const HttpRequest = think.service('httpRequest');
-            const param = this.get();
-            if (!param.wd) {
-                param.wd = '';
-            } else {
-                param.wd = encodeURI(param.wd);
-            }
-            let result = await HttpRequest.GetService('http://suggestion.baidu.com/su?ie=UTF-8&wd=' + param.wd);
-            let jsonStr = Utils.getBetweenTwoStringContent(result.body, '[', ']', true);
-            try {
-                let resultArr = JSON.parse(jsonStr.replace(/\\/g, ''));
-                for (let i = 0; i < resultArr.length; i++) {
-                    resultArr[i] = {
-                        value: resultArr[i]
-                    }
+        const HttpRequest = think.service('httpRequest');
+        const param = this.get();
+        if (!param.wd) {
+            param.wd = '';
+        } else {
+            param.wd = encodeURI(param.wd);
+        }
+        let result = await HttpRequest.GetService('http://suggestion.baidu.com/su?ie=UTF-8&wd=' + param.wd);
+        let jsonStr = Utils.getBetweenTwoStringContent(result.body, '[', ']', true);
+        try {
+            let resultArr = JSON.parse(jsonStr.replace(/\\/g, ''));
+            for (let i = 0; i < resultArr.length; i++) {
+                resultArr[i] = {
+                    value: resultArr[i]
                 }
-                this.success(resultArr, '获取搜索建议文本成功');
-            } catch (err) {
-                console.log(err);
-                this.fail(500, '解析搜索结果失败');
             }
+            this.success(resultArr, '获取搜索建议文本成功');
+            return false;
+        } catch (err) {
+            console.log(err);
+            this.fail(500, '解析搜索结果失败');
+            return false;
         }
     }
 }

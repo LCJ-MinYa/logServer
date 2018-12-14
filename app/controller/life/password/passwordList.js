@@ -60,15 +60,14 @@ class PasswordList extends BaseRest {
     var _this = this;
 
     return _asyncToGenerator(function* () {
-      if (_this.isPost) {
-        const PasswordList = think.mongo('PasswordList', 'mongoPassword');
-        let param = _this.post();
-        let result = yield PasswordList.where({
-          uid: param.uid,
-          type: param.type
-        }).order('timestamp').select();
-        _this.success(result, '获取密码列表成功');
-      }
+      const PasswordList = think.mongo('PasswordList', 'mongoPassword');
+      let param = _this.post();
+      let result = yield PasswordList.where({
+        uid: param.uid,
+        type: param.type
+      }).order('timestamp').select();
+      _this.success(result, '获取密码列表成功');
+      return false;
     })();
   }
 }

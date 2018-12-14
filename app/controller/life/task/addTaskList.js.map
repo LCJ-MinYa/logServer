@@ -8,7 +8,6 @@
         "require",
         "AddTaskList",
         "indexAction",
-        "isPost",
         "PasswordList",
         "think",
         "mongo",
@@ -25,9 +24,9 @@
         "_id",
         "fail"
     ],
-    "mappings": ";;;;AAAA,MAAMA,WAAWC,QAAQ,YAAR,CAAjB;;AAEe,MAAMC,WAAN,SAA0BF,QAA1B,CAAmC;AACxCG,eAAN,GAAoB;AAAA;;AAAA;AAChB,gBAAI,MAAKC,MAAT,EAAiB;AACb,sBAAMC,eAAeC,MAAMC,KAAN,CAAY,UAAZ,EAAwB,eAAxB,CAArB;AACA,oBAAIC,QAAQ,MAAKC,IAAL,EAAZ;AACA,uBAAOD,MAAME,WAAb;AACA,oBAAIC,SAAS,MAAMN,aAAaO,KAAb,CAAmB;AAClCC,yBAAKL,MAAMK,GADuB;AAElCC,0BAAMN,MAAMM;AAFsB,iBAAnB,EAGhBC,OAHgB,CAGRP,KAHQ,CAAnB;AAIA,oBAAIG,OAAOK,IAAP,IAAe,KAAnB,EAA0B;AACtB,0BAAKC,OAAL,CAAa;AACTC,6BAAKP,OAAOO;AADH,qBAAb,EAEG,UAFH;AAGH,iBAJD,MAIO;AACH,0BAAKC,IAAL,CAAU,GAAV,EAAe,aAAf;AACH;AACJ;AAhBe;AAiBnB;AAlB6C;kBAA7BjB,W",
+    "mappings": ";;;;AAAA,MAAMA,WAAWC,QAAQ,YAAR,CAAjB;;AAEe,MAAMC,WAAN,SAA0BF,QAA1B,CAAmC;AACxCG,eAAN,GAAoB;AAAA;;AAAA;AAChB,kBAAMC,eAAeC,MAAMC,KAAN,CAAY,UAAZ,EAAwB,eAAxB,CAArB;AACA,gBAAIC,QAAQ,MAAKC,IAAL,EAAZ;AACA,mBAAOD,MAAME,WAAb;AACA,gBAAIC,SAAS,MAAMN,aAAaO,KAAb,CAAmB;AAClCC,qBAAKL,MAAMK,GADuB;AAElCC,sBAAMN,MAAMM;AAFsB,aAAnB,EAGhBC,OAHgB,CAGRP,KAHQ,CAAnB;AAIA,gBAAIG,OAAOK,IAAP,IAAe,KAAnB,EAA0B;AACtB,sBAAKC,OAAL,CAAa;AACTC,yBAAKP,OAAOO;AADH,iBAAb,EAEG,UAFH;AAGA,uBAAO,KAAP;AACH,aALD,MAKO;AACH,sBAAKC,IAAL,CAAU,GAAV,EAAe,aAAf;AACA,uBAAO,KAAP;AACH;AAhBe;AAiBnB;AAlB6C;kBAA7BhB,W",
     "file": "../../../../src/controller/life/task/addTaskList.js",
     "sourcesContent": [
-        "const BaseRest = require('../rest.js');\n\nexport default class AddTaskList extends BaseRest {\n    async indexAction() {\n        if (this.isPost) {\n            const PasswordList = think.mongo('TaskList', 'mongoPassword');\n            let param = this.post();\n            delete param.accessToken;\n            let result = await PasswordList.where({\n                uid: param.uid,\n                text: param.text\n            }).thenAdd(param);\n            if (result.type == 'add') {\n                this.success({\n                    _id: result._id\n                }, '新增任务项目成功');\n            } else {\n                this.fail(401, '已存在相同任务项目名称');\n            }\n        }\n    }\n}"
+        "const BaseRest = require('../rest.js');\n\nexport default class AddTaskList extends BaseRest {\n    async indexAction() {\n        const PasswordList = think.mongo('TaskList', 'mongoPassword');\n        let param = this.post();\n        delete param.accessToken;\n        let result = await PasswordList.where({\n            uid: param.uid,\n            text: param.text\n        }).thenAdd(param);\n        if (result.type == 'add') {\n            this.success({\n                _id: result._id\n            }, '新增任务项目成功');\n            return false;\n        } else {\n            this.fail(401, '已存在相同任务项目名称');\n            return false;\n        }\n    }\n}"
     ]
 }

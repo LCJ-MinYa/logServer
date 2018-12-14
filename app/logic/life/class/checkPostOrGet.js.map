@@ -1,0 +1,15 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../../src/logic/life/class/checkPostOrGet.js"
+    ],
+    "names": [
+        "CheckPassword",
+        "CheckUserPermission"
+    ],
+    "mappings": ";AAAe,MAAMA,aAAN,SAA4BC,mBAA5B,CAAgD;kBAA1CD,a",
+    "file": "../../../../src/logic/life/class/checkPostOrGet.js",
+    "sourcesContent": [
+        "export default class CheckPassword extends CheckUserPermission {}"
+    ]
+}

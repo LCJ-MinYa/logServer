@@ -39,17 +39,17 @@ class DeletePassword extends BaseRest {
         var _this = this;
 
         return _asyncToGenerator(function* () {
-            if (_this.isPost) {
-                let param = _this.post();
-                const PasswordList = think.mongo('PasswordList', 'mongoPassword');
-                let result = yield PasswordList.where({
-                    _id: param._id
-                }).delete();
-                if (result) {
-                    _this.success({}, '删除密码数据信息成功');
-                } else {
-                    _this.fail(401, '删除密码数据信息失败');
-                }
+            let param = _this.post();
+            const PasswordList = think.mongo('PasswordList', 'mongoPassword');
+            let result = yield PasswordList.where({
+                _id: param._id
+            }).delete();
+            if (result) {
+                _this.success({}, '删除密码数据信息成功');
+                return false;
+            } else {
+                _this.fail(401, '删除密码数据信息失败');
+                return false;
             }
         })();
     }

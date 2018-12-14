@@ -1,9 +1,3 @@
-var _sha = require('../../utils/sha1');
-
-var _sha2 = _interopRequireDefault(_sha);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 module.exports = class extends think.Controller {
@@ -17,30 +11,7 @@ module.exports = class extends think.Controller {
         this.id = this.getId();
         this.modelInstance = this.mongo(this.resource);
     }
-    __before() {
-        const param = this.isGet ? this.get() : this.post();
-        if (param.accessToken) {
-            // if (param.timestamp) {
-            //     let newTimestamp = new Date().getTime();
-            //     let oldTimestamp;
-            //     console.log('这里需要判断请求的时间是否在一分钟之内，防止过期请求,同时过滤来自api.ziyiu.com允许测试api过期请求');
-            // }
-            if (param.accessToken !== _sha2.default.sha1(param.uid + param.timestamp).substring(3, 10)) {
-                this.fail(401, '瞎请求干啥，心疼我的服务器!');
-                return false;
-            }
-        } else {
-            this.fail(401, '瞎请求干啥，心疼我的服务器!');
-            return false;
-        }
-
-        if (this.isGet) {
-            this.fail(403, '请求不支持GET方法！');
-        }
-        if (this.isPost) {
-            this.fail(403, '请求不支持POST方法！');
-        }
-    }
+    __before() {}
     /**
      * get resource
      * @return {String} [resource name]

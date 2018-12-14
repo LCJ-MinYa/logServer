@@ -9,22 +9,22 @@ class CreatTaskItem extends BaseRest {
         var _this = this;
 
         return _asyncToGenerator(function* () {
-            if (_this.isPost) {
-                const PasswordList = think.mongo('TaskItem', 'mongoPassword');
-                let param = _this.post();
-                delete param.accessToken;
-                let result = yield PasswordList.where({
-                    uid: param.uid,
-                    title: param.title,
-                    type: param.type
-                }).thenAdd(param);
-                if (result.type == 'add') {
-                    _this.success({
-                        _id: result._id
-                    }, '项目新增任务成功');
-                } else {
-                    _this.fail(401, '任务项目中已存在相同任务名称');
-                }
+            const PasswordList = think.mongo('TaskItem', 'mongoPassword');
+            let param = _this.post();
+            delete param.accessToken;
+            let result = yield PasswordList.where({
+                uid: param.uid,
+                title: param.title,
+                type: param.type
+            }).thenAdd(param);
+            if (result.type == 'add') {
+                _this.success({
+                    _id: result._id
+                }, '项目新增任务成功');
+                return false;
+            } else {
+                _this.fail(401, '任务项目中已存在相同任务名称');
+                return false;
             }
         })();
     }

@@ -9,14 +9,13 @@ class TaskList extends BaseRest {
         var _this = this;
 
         return _asyncToGenerator(function* () {
-            if (_this.isPost) {
-                const PasswordList = think.mongo('TaskList', 'mongoPassword');
-                let param = _this.post();
-                let result = yield PasswordList.where({
-                    uid: param.uid
-                }).order('timestamp').select();
-                _this.success(result, '获取任务项目列表成功');
-            }
+            const PasswordList = think.mongo('TaskList', 'mongoPassword');
+            let param = _this.post();
+            let result = yield PasswordList.where({
+                uid: param.uid
+            }).order('timestamp').select();
+            _this.success(result, '获取任务项目列表成功');
+            return false;
         })();
     }
 }

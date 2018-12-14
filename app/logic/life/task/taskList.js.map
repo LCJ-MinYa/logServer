@@ -6,9 +6,9 @@
     "names": [
         "TaskList"
     ],
-    "mappings": ";;AAAA;;;;;;AAEe,MAAMA,QAAN,uCAA2C;kBAArCA,Q",
+    "mappings": ";;AAAA;;;;;;AAEe,MAAMA,QAAN,gCAAoC;kBAA9BA,Q",
     "file": "../../../../src/logic/life/task/taskList.js",
     "sourcesContent": [
-        "import CheckUserPermission from '../class/checkUserPermission';\n\nexport default class TaskList extends CheckUserPermission {\n\n}"
+        "import CheckPostReq from '../class/checkPostReq';\n\nexport default class TaskList extends CheckPostReq {\n\n}"
     ]
 }

@@ -1,0 +1,19 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../../src/logic/webhook/class/checkPostReq.js"
+    ],
+    "names": [
+        "CheckPostReq",
+        "think",
+        "Logic",
+        "__before",
+        "isGet",
+        "fail"
+    ],
+    "mappings": ";AAAe,MAAMA,YAAN,SAA2BC,MAAMC,KAAjC,CAAuC;AAClDC,eAAW;AACP,YAAI,KAAKC,KAAT,EAAgB;AACZ,iBAAKC,IAAL,CAAU,GAAV,EAAe,aAAf;AACA,mBAAO,KAAP;AACH;AACJ;AANiD;kBAAjCL,Y",
+    "file": "../../../../src/logic/webhook/class/checkPostReq.js",
+    "sourcesContent": [
+        "export default class CheckPostReq extends think.Logic {\n    __before() {\n        if (this.isGet) {\n            this.fail(403, '请求不支持GET方法！');\n            return false;\n        }\n    }\n}"
+    ]
+}
