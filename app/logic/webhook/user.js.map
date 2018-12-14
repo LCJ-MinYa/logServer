@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/logic/webhook/user.js"
+    ],
+    "names": [
+        "LogServerWebHook",
+        "think",
+        "Logic",
+        "indexAction"
+    ],
+    "mappings": ";AAAe,MAAMA,gBAAN,SAA+BC,MAAMC,KAArC,CAA2C;AACtDC,kBAAc,CAEb;AAHqD;kBAArCH,gB",
+    "file": "../../../src/logic/webhook/user.js",
+    "sourcesContent": [
+        "export default class LogServerWebHook extends think.Logic {\n    indexAction() {\n\n    }\n}"
+    ]
+}

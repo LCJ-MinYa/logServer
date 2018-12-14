@@ -1,0 +1,32 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/controller/webhook/logServer.js"
+    ],
+    "names": [
+        "BaseRest",
+        "require",
+        "exec",
+        "LogServerWebHook",
+        "indexAction",
+        "isPost",
+        "headers",
+        "ctx",
+        "fail",
+        "sha1Secret",
+        "logServerWebhookSecret",
+        "post",
+        "console",
+        "log",
+        "cmdStr",
+        "err",
+        "result",
+        "process",
+        "exit"
+    ],
+    "mappings": ";;AAEA;;;;AACA;;;;;;AAHA,MAAMA,WAAWC,QAAQ,WAAR,CAAjB;AACA,MAAMC,OAAOD,QAAQ,eAAR,EAAyBC,IAAtC;;;AAMA;;;;;;;;;;;;;;;;;;;;;;;;;;AA0Be,MAAMC,gBAAN,SAA+BH,QAA/B,CAAwC;AAC7CI,eAAN,GAAoB;AAAA;;AAAA;AAChB,gBAAI,MAAKC,MAAT,EAAiB;AACb,sBAAMC,UAAU,MAAKC,GAAL,CAASD,OAAzB;AACA,oBAAIA,QAAQ,YAAR,KAAyB,yBAA7B,EAAwD;AACpD,0BAAKE,IAAL,CAAU,GAAV,EAAe,SAAf;AACH;AACD,oBAAIF,QAAQ,gBAAR,KAA6B,MAAjC,EAAyC;AACrC,0BAAKE,IAAL,CAAU,GAAV,EAAe,UAAf;AACH;AACD,sBAAMC,aAAa,UAAU,gBAAMA,UAAN,CAAiB,eAAMC,sBAAvB,EAA+C,MAAKC,IAAL,EAA/C,CAA7B;AACAC,wBAAQC,GAAR,CAAYJ,UAAZ;AACA,oBAAIH,QAAQ,iBAAR,KAA8BG,UAAlC,EAA8C;AAC1C,0BAAKD,IAAL,CAAU,GAAV,EAAe,QAAf;AACH;;AAED,sBAAMM,SAAS,qCAAf;AACAZ,qBAAKY,MAAL,EAAa,UAACC,GAAD,EAAMC,MAAN,EAAiB;AAC1B,wBAAID,GAAJ,EAAS;AACLH,gCAAQC,GAAR,CAAYE,GAAZ;AACAE,gCAAQC,IAAR;AACH;AACDN,4BAAQC,GAAR,CAAY,MAAZ;AACAI,4BAAQC,IAAR;AACH,iBAPD;AAQH;AAxBe;AAyBnB;AA1BkD;kBAAlCf,gB",
+    "file": "../../../src/controller/webhook/logServer.js",
+    "sourcesContent": [
+        "const BaseRest = require('./rest.js');\nconst exec = require('child_process').exec;\nimport Utils from '../../utils/utils';\nimport {\n    model\n} from '../../config/adapter';\n\n/**\n * @api {post} /webhook/logServer logServer自动部署\n * @apiDescription 根据github（push）触发自动部署\n * @apiGroup webhookGroup\n * @apiVersion 1.0.0\n *\n * @apiParam {String} type 密码类型\n *\n * @apiParamExample {string} 请求参数格式:\n *  {\n *      \"timestamp\": 1543578242441,\n *      \"accessToken\": 'e2b06cd',\n *      \"uid\": 'user-uid'\n *  }\n *\n * @apiUse baseSuccessParams\n *\n * @apiSuccessExample {json} 正确返回值:\n *  {\n *      \"data\": {},\n *      \"errno\": 0,\n *      \"errmsg\": \"服务器自动部署成功\"\n *  }\n *  @apiUse CODE_METHOD_GET_403\n *  @apiUse CODE_METHOD_POST_403\n */\nexport default class LogServerWebHook extends BaseRest {\n    async indexAction() {\n        if (this.isPost) {\n            const headers = this.ctx.headers;\n            if (headers['user-agent'] != 'GitHub-Hookshot/3c05c9b') {\n                this.fail(401, '非法的请求头!');\n            }\n            if (headers['x-github-event'] != 'push') {\n                this.fail(401, '非push触发!');\n            }\n            const sha1Secret = 'sha1=' + Utils.sha1Secret(model.logServerWebhookSecret, this.post());\n            console.log(sha1Secret);\n            if (headers['x-hub-signature'] != sha1Secret) {\n                this.fail(401, '非法的密钥!');\n            }\n\n            const cmdStr = \"sh -x /root/www/logServer/deploy.sh\";\n            exec(cmdStr, (err, result) => {\n                if (err) {\n                    console.log(err);\n                    process.exit();\n                }\n                console.log('执行成功');\n                process.exit();\n            })\n        }\n    }\n}"
+    ]
+}

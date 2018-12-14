@@ -1,0 +1,33 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/controller/life/login.js"
+    ],
+    "names": [
+        "BaseRest",
+        "require",
+        "Login",
+        "indexAction",
+        "isPost",
+        "param",
+        "post",
+        "User",
+        "think",
+        "mongo",
+        "result",
+        "where",
+        "email",
+        "select",
+        "length",
+        "password",
+        "success",
+        "uid",
+        "userName",
+        "fail"
+    ],
+    "mappings": ";;;;AAAA,MAAMA,WAAWC,QAAQ,WAAR,CAAjB;;AAEA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAqCe,MAAMC,KAAN,SAAoBF,QAApB,CAA6B;AACrCG,aAAN,GAAoB;AAAA;;AAAA;AACnB,UAAI,MAAKC,MAAT,EAAiB;AAChB,cAAMC,QAAQ,MAAKC,IAAL,EAAd;AACA,cAAMC,OAAOC,MAAMC,KAAN,CAAY,MAAZ,CAAb;AACA,cAAMC,SAAS,MAAMH,KAAKI,KAAL,CAAW;AAC/BC,iBAAOP,MAAMO;AADkB,SAAX,EAElBC,MAFkB,EAArB;AAGA,YAAIH,OAAOI,MAAP,KAAkB,CAAtB,EAAyB;AACxB,cAAIJ,OAAO,CAAP,EAAUK,QAAV,IAAsBV,MAAMU,QAAhC,EAA0C;AACzC,kBAAKC,OAAL,CAAa;AACZC,mBAAKP,OAAO,CAAP,EAAUO,GADH;AAEZC,wBAAUR,OAAO,CAAP,EAAUQ;AAFR,aAAb,EAGG,MAHH;AAIA,WALD,MAKO;AACN,kBAAKC,IAAL,CAAU,GAAV,EAAe,WAAf;AACA;AACD,SATD,MASO;AACN,gBAAKA,IAAL,CAAU,GAAV,EAAe,WAAf;AACA;AACD;AAnBkB;AAoBnB;AArB0C;kBAAvBjB,K",
+    "file": "../../../src/controller/life/login.js",
+    "sourcesContent": [
+        "const BaseRest = require('./rest.js');\n\n/**\n * @api {post} /life/login 用户登录\n * @apiDescription 根据用户信息（email, password）登录恣意游\n * @apiGroup loginGroup\n *\n * @apiParam {String} email 用户邮箱地址\n * @apiParam {String} password 用户密码\n * @apiUse baseUnLoginParams\n *\n * @apiParamExample {string} 请求参数格式:\n *\t{\n *\t    \"email\": \"ceshi@ziyiu.com\",\n *\t    \"password\": \"123456\",\n *\t    \"timestamp\": 1543578242441,\n *\t    \"accessToken\": 'e2b06cd',\n *\t    \"uid\": ''\n *\t}\n *\n * @apiVersion 1.0.0\n * @apiSuccessExample {json} 正确返回值:\n *\t{\n *\t    \"data\": {\n *\t        \"uid\": \"5c097013-3d8a-482f-8131-50a833983175\",\n *\t        \"userName\": \"123\",\n *\t    },\n *\t    \"errno\": 0,\n *\t    \"errmsg\": \"登录成功\"\n *\t}\n * @apiErrorExample {json} 错误返回值:\n *\t{\n *\t\t\"errno\": 401,\n *\t\t\"errmsg\": \"用户名或密码错误!\"\n *\t}\n *  @apiUse CODE_REFUSE_401\n *  @apiUse CODE_METHOD_GET_403\n *  @apiUse CODE_METHOD_POST_403\n */\nexport default class Login extends BaseRest {\n\tasync indexAction() {\n\t\tif (this.isPost) {\n\t\t\tconst param = this.post();\n\t\t\tconst User = think.mongo('User');\n\t\t\tconst result = await User.where({\n\t\t\t\temail: param.email\n\t\t\t}).select();\n\t\t\tif (result.length !== 0) {\n\t\t\t\tif (result[0].password == param.password) {\n\t\t\t\t\tthis.success({\n\t\t\t\t\t\tuid: result[0].uid,\n\t\t\t\t\t\tuserName: result[0].userName\n\t\t\t\t\t}, '登录成功');\n\t\t\t\t} else {\n\t\t\t\t\tthis.fail(401, '用户名或密码错误!');\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\tthis.fail(401, '用户名或密码错误!');\n\t\t\t}\n\t\t}\n\t}\n}"
+    ]
+}

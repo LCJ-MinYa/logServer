@@ -1,0 +1,21 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../../src/logic/life/task/addTaskItem.js"
+    ],
+    "names": [
+        "AddTaskItem",
+        "indexAction",
+        "isPost",
+        "param",
+        "post",
+        "title",
+        "fail",
+        "type"
+    ],
+    "mappings": ";;AAAA;;;;;;AAEe,MAAMA,WAAN,uCAA8C;AACzDC,kBAAc;AACV,YAAI,KAAKC,MAAT,EAAiB;AACb,kBAAMC,QAAQ,KAAKC,IAAL,EAAd;AACA,gBAAI,CAACD,MAAME,KAAX,EAAkB;AACd,qBAAKC,IAAL,CAAU,GAAV,EAAe,WAAf;AACA,uBAAO,KAAP;AACH;AACD,gBAAI,CAACH,MAAMI,IAAX,EAAiB;AACb,qBAAKD,IAAL,CAAU,GAAV,EAAe,WAAf;AACA,uBAAO,KAAP;AACH;AACJ;AACJ;AAbwD;kBAAxCN,W",
+    "file": "../../../../src/logic/life/task/addTaskItem.js",
+    "sourcesContent": [
+        "import CheckUserPermission from '../class/checkUserPermission';\n\nexport default class AddTaskItem extends CheckUserPermission {\n    indexAction() {\n        if (this.isPost) {\n            const param = this.post();\n            if (!param.title) {\n                this.fail(400, '任务名称不能为空!');\n                return false;\n            }\n            if (!param.type) {\n                this.fail(400, '所属项目不能为空!');\n                return false;\n            }\n        }\n    }\n}"
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/service/httpRequest.js"
+    ],
+    "names": [
+        "HttpRequest",
+        "think",
+        "Service",
+        "constructor",
+        "PostService",
+        "url",
+        "data",
+        "isEmpty",
+        "console",
+        "log",
+        "postPromisify",
+        "promisify",
+        "post",
+        "form",
+        "GetService",
+        "getPromisify",
+        "get"
+    ],
+    "mappings": "AAAA;;;;AACA;;;;;;AAEe,MAAMA,WAAN,SAA0BC,MAAMC,OAAhC,CAAwC;AACnDC,kBAAc;AACV;AACH;AACD;;;;;AAKAC,gBAAYC,GAAZ,EAAiBC,IAAjB,EAAuB;AACnB,YAAIL,MAAMM,OAAN,CAAcF,GAAd,CAAJ,EAAwB;AACpBG,oBAAQC,GAAR,CAAY,UAAZ;AACH,SAFD,MAEO;AACH,gBAAIC,gBAAgBT,MAAMU,SAAN,CAAgB,kBAAQC,IAAxB,CAApB;AACA,mBAAOF,cAAc;AACjBL,qBAAKA,GADY;AAEjBQ,sBAAMP;AAFW,aAAd,CAAP;AAIH;AACJ;AACD;;;;;AAKAQ,eAAWT,GAAX,EAAgB,GAAGC,IAAnB,EAAyB;AACrB,YAAIL,MAAMM,OAAN,CAAcF,GAAd,CAAJ,EAAwB;AACpBG,oBAAQC,GAAR,CAAY,UAAZ;AACH,SAFD,MAEO;AACH,gBAAIM,eAAed,MAAMU,SAAN,CAAgB,kBAAQK,GAAxB,CAAnB;AACA,gBAAIf,MAAMM,OAAN,CAAcD,IAAd,CAAJ,EAAyB;AACrB,uBAAOS,aAAa;AAChBV,yBAAKA;AADW,iBAAb,CAAP;AAGH,aAJD,MAIO;AACH,uBAAOU,aAAa;AAChBV,yBAAKA,GADW;AAEhBQ,0BAAMP;AAFU,iBAAb,CAAP;AAIH;AACJ;AACJ;AAzCkD;kBAAlCN,W",
+    "file": "../../src/service/httpRequest.js",
+    "sourcesContent": [
+        "'use strict';\nimport request from \"request\";\n\nexport default class HttpRequest extends think.Service {\n    constructor() {\n        super();\n    }\n    /**\n     * [PostService 获取POST服务]\n     * @param {[type]} url  [description]\n     * @param {[type]} data [description]\n     */\n    PostService(url, data) {\n        if (think.isEmpty(url)) {\n            console.log(\"URL不能为空!\");\n        } else {\n            let postPromisify = think.promisify(request.post);\n            return postPromisify({\n                url: url,\n                form: data\n            });\n        }\n    }\n    /**\n     * [GetService 获取GET服务]\n     * @param {[type]}    url  [description]\n     * @param {...[type]} data [description]\n     */\n    GetService(url, ...data) {\n        if (think.isEmpty(url)) {\n            console.log(\"URL不能为空!\");\n        } else {\n            let getPromisify = think.promisify(request.get);\n            if (think.isEmpty(data)) {\n                return getPromisify({\n                    url: url\n                });\n            } else {\n                return getPromisify({\n                    url: url,\n                    form: data\n                });\n            }\n        }\n    }\n}"
+    ]
+}

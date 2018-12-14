@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/apidoc/apidocClass.js"
+    ],
+    "names": [],
+    "mappings": "AAAA;AACA;AACA;;AAEA;;;;AAIA;;;;AAIA;;;;AAIA;;;;AAIA;;;;AAIA;;;;;;;AAOA;;;;;;;AAOA;;;;;;;AAOA;;;;;;;;;AASA;;;;;;;;;AASA;;;;;;;;;AASA;;;;;;;;;AASA",
+    "file": "../../src/apidoc/apidocClass.js",
+    "sourcesContent": [
+        "// ------------------------------------------------------------------------------------------\n// Current Errors.\n// ------------------------------------------------------------------------------------------\n\n/**\n *  @apiDefine loginGroup 用户信息\n */\n\n/**\n * @apiDefine passwordGroup 密码存储\n */\n\n/**\n * @apiDefine taskGroup 任务存储\n */\n\n/**\n * @apiDefine searchGroup 搜索\n */\n\n/**\n * @apiDefine webhookGroup 自动部署\n */\n\n/**\n * @apiDefine baseHasLoginParams 已登录公用请求参数\n * @apiParam {Date}   timestamp 请求时间戳\n * @apiParam {String} accessToken 请求验证token\n * @apiParam {String} uid 用户uid\n */\n\n/**\n * @apiDefine baseUnLoginParams 未登录公用请求参数\n * @apiParam {Date}   timestamp 请求时间戳\n * @apiParam {String} accessToken 请求验证token\n * @apiParam {String} [uid] 用户uid\n */\n\n/**\n * @apiDefine baseSuccessParams 请求成功返回信息\n * @apiSuccess {Number} errno 返回状态码\n * @apiSuccess {String} errmsg 返回信息\n * @apiSuccess {Object} data 返回对象数据\n */\n\n/**\n * @apiDefine CODE_REFUSE_401 非法请求\n * @apiErrorExample {json} 非法请求401\n *  {\n *      \"errno\": 401,\n *      \"errmsg\": \"瞎请求干啥，心疼我的服务器!\"\n *  }\n */\n\n/**\n * @apiDefine CODE_UID_203 无用户信息\n * @apiErrorExample {json} 无用户信息\n *  {\n *      \"errno\": 203,\n *      \"errmsg\": \"未获取到用户信息，请重新登陆!\"\n *  }\n */\n\n/**\n * @apiDefine CODE_METHOD_GET_403 不支持GET请求\n * @apiErrorExample {json} 不支持GET请求\n *  {\n *      \"errno\": 403,\n *      \"errmsg\": \"请求不支持GET方法！\"\n *  }\n */\n\n/**\n * @apiDefine CODE_METHOD_POST_403 不支持POST请求\n * @apiErrorExample {json} 不支持POST请求\n *  {\n *      \"errno\": 403,\n *      \"errmsg\": \"请求不支持POST方法！\"\n *  }\n */\n\n/**\n * @apiDefine CODE_DEPLOY_500 自动部署失败\n * @apiErrorExample {json} 自动部署失败\n *  {\n *      \"errno\": 500,\n *      \"errmsg\": \"服务器自动部署失败！\"\n *  }\n */"
+    ]
+}

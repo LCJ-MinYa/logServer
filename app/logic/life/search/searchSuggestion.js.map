@@ -1,0 +1,15 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../../src/logic/life/search/searchSuggestion.js"
+    ],
+    "names": [
+        "think",
+        "Logic"
+    ],
+    "mappings": ";kBAAe,cAAcA,MAAMC,KAApB,CAA0B,E",
+    "file": "../../../../src/logic/life/search/searchSuggestion.js",
+    "sourcesContent": [
+        "export default class extends think.Logic {\n\n}"
+    ]
+}

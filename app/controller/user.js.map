@@ -1,0 +1,31 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/controller/user.js"
+    ],
+    "names": [
+        "BaseRest",
+        "require",
+        "User",
+        "indexAction",
+        "isGet",
+        "num",
+        "think",
+        "mongo",
+        "data",
+        "find",
+        "console",
+        "log",
+        "a",
+        "shyData",
+        "page",
+        "select",
+        "success",
+        "b"
+    ],
+    "mappings": ";;;;AAAA,MAAMA,WAAWC,QAAQ,WAAR,CAAjB;;AAEe,MAAMC,IAAN,SAAmBF,QAAnB,CAA4B;AACpCG,YAAN,GAAoB;AAAA;;AAAA;AACnB,OAAI,MAAKC,KAAT,EAAgB;AACf,UAAMC,MAAMC,MAAMC,KAAN,CAAY,UAAZ,CAAZ;AACA,UAAMC,OAAO,MAAMH,IAAII,IAAJ,EAAnB;AACAC,YAAQC,GAAR,CAAYH,IAAZ;;AAEA,UAAMI,IAAIN,MAAMC,KAAN,CAAY,YAAZ,EAA0B,eAA1B,CAAV;AACA,QAAIM,UAAU,MAAMD,EAAEE,IAAF,CAAO,CAAP,EAAUC,MAAV,EAApB;AACAL,YAAQC,GAAR,CAAYE,OAAZ;AACA,UAAKG,OAAL,CAAa;AACZJ,QAAG,CADS;AAEZK,QAAG;AAFS,KAAb,EAGG,SAHH;AAIA;AAbkB;AAcnB;AAfyC;kBAAtBf,I",
+    "file": "../../src/controller/user.js",
+    "sourcesContent": [
+        "const BaseRest = require('./rest.js');\n\nexport default class User extends BaseRest {\n\tasync indexAction() {\n\t\tif (this.isGet) {\n\t\t\tconst num = think.mongo('RoomList');\n\t\t\tconst data = await num.find();\n\t\t\tconsole.log(data);\n\n\t\t\tconst a = think.mongo('AsiaNoCode', 'mongoPassword');\n\t\t\tlet shyData = await a.page(1).select();\n\t\t\tconsole.log(shyData);\n\t\t\tthis.success({\n\t\t\t\ta: 1,\n\t\t\t\tb: 2\n\t\t\t}, '请求用户请求!');\n\t\t}\n\t}\n}"
+    ]
+}

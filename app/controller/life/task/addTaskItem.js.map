@@ -1,0 +1,33 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../../src/controller/life/task/addTaskItem.js"
+    ],
+    "names": [
+        "BaseRest",
+        "require",
+        "AddTaskItem",
+        "indexAction",
+        "isPost",
+        "PasswordList",
+        "think",
+        "mongo",
+        "param",
+        "post",
+        "accessToken",
+        "result",
+        "where",
+        "uid",
+        "title",
+        "type",
+        "thenAdd",
+        "success",
+        "_id",
+        "fail"
+    ],
+    "mappings": ";;;;AAAA,MAAMA,WAAWC,QAAQ,YAAR,CAAjB;;AAEe,MAAMC,WAAN,SAA0BF,QAA1B,CAAmC;AACxCG,eAAN,GAAoB;AAAA;;AAAA;AAChB,gBAAI,MAAKC,MAAT,EAAiB;AACb,sBAAMC,eAAeC,MAAMC,KAAN,CAAY,UAAZ,EAAwB,eAAxB,CAArB;AACA,oBAAIC,QAAQ,MAAKC,IAAL,EAAZ;AACA,uBAAOD,MAAME,WAAb;AACA,oBAAIC,SAAS,MAAMN,aAAaO,KAAb,CAAmB;AAClCC,yBAAKL,MAAMK,GADuB;AAElCC,2BAAON,MAAMM,KAFqB;AAGlCC,0BAAMP,MAAMO;AAHsB,iBAAnB,EAIhBC,OAJgB,CAIRR,KAJQ,CAAnB;AAKA,oBAAIG,OAAOI,IAAP,IAAe,KAAnB,EAA0B;AACtB,0BAAKE,OAAL,CAAa;AACTC,6BAAKP,OAAOO;AADH,qBAAb,EAEG,UAFH;AAGH,iBAJD,MAIO;AACH,0BAAKC,IAAL,CAAU,GAAV,EAAe,gBAAf;AACH;AACJ;AAjBe;AAkBnB;AAnB6C;kBAA7BjB,W",
+    "file": "../../../../src/controller/life/task/addTaskItem.js",
+    "sourcesContent": [
+        "const BaseRest = require('../rest.js');\n\nexport default class AddTaskItem extends BaseRest {\n    async indexAction() {\n        if (this.isPost) {\n            const PasswordList = think.mongo('TaskList', 'mongoPassword');\n            let param = this.post();\n            delete param.accessToken;\n            let result = await PasswordList.where({\n                uid: param.uid,\n                title: param.title,\n                type: param.type\n            }).thenAdd(param);\n            if (result.type == 'add') {\n                this.success({\n                    _id: result._id\n                }, '项目新增任务成功');\n            } else {\n                this.fail(401, '任务项目中已存在相同任务名称');\n            }\n        }\n    }\n}"
+    ]
+}

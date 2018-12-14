@@ -1,0 +1,25 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/logic/api/login.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "think",
+        "Logic",
+        "indexAction",
+        "isPost",
+        "param",
+        "post",
+        "email",
+        "fail",
+        "password",
+        "length"
+    ],
+    "mappings": "AAAA;;AAIAA,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,KAApB,CAA0B;AAC1CC,eAAc;AACb,MAAI,KAAKC,MAAT,EAAiB;AAChB,SAAMC,QAAQ,KAAKC,IAAL,EAAd;AACA,OAAI,CAACD,MAAME,KAAX,EAAkB;AACjB,SAAKC,IAAL,CAAU,GAAV,EAAe,WAAf;AACA,WAAO,KAAP;AACA;AACD,OAAI,CAAC,uBAAWH,MAAME,KAAjB,CAAL,EAA8B;AAC7B,SAAKC,IAAL,CAAU,GAAV,EAAe,aAAf;AACA,WAAO,KAAP;AACA;AACD,OAAI,CAACH,MAAMI,QAAX,EAAqB;AACpB,SAAKD,IAAL,CAAU,GAAV,EAAe,SAAf;AACA,WAAO,KAAP;AACA;AACD,OAAIH,MAAMI,QAAN,CAAeC,MAAf,GAAwB,CAA5B,EAA+B;AAC9B,SAAKF,IAAL,CAAU,GAAV,EAAe,YAAf;AACA,WAAO,KAAP;AACA;AACD;AACD;AArByC,CAA3C",
+    "file": "../../../src/logic/api/login.js",
+    "sourcesContent": [
+        "import {\n\tmatchEmail\n} from '../../utils/utils'\n\nmodule.exports = class extends think.Logic {\n\tindexAction() {\n\t\tif (this.isPost) {\n\t\t\tconst param = this.post();\n\t\t\tif (!param.email) {\n\t\t\t\tthis.fail(400, '邮箱地址不能为空!');\n\t\t\t\treturn false;\n\t\t\t}\n\t\t\tif (!matchEmail(param.email)) {\n\t\t\t\tthis.fail(400, '请输入正确的邮箱地址!');\n\t\t\t\treturn false;\n\t\t\t}\n\t\t\tif (!param.password) {\n\t\t\t\tthis.fail(400, '密码不能为空!');\n\t\t\t\treturn false;\n\t\t\t}\n\t\t\tif (param.password.length < 6) {\n\t\t\t\tthis.fail(400, '密码不能小于6位数!');\n\t\t\t\treturn false;\n\t\t\t}\n\t\t}\n\t}\n};"
+    ]
+}

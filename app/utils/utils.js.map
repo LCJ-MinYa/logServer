@@ -1,0 +1,35 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/utils/utils.js"
+    ],
+    "names": [
+        "crypto",
+        "require",
+        "matchEmail",
+        "string",
+        "reg",
+        "test",
+        "getBetweenTwoStringContent",
+        "strContent",
+        "firstStr",
+        "lastStr",
+        "isHaveFirstStrAndLastStr",
+        "result",
+        "split",
+        "sha1Secret",
+        "secret",
+        "body",
+        "createHmac",
+        "update",
+        "JSON",
+        "stringify",
+        "digest",
+        "toString"
+    ],
+    "mappings": "AAAA;;;AACA,MAAMA,SAASC,QAAQ,QAAR,CAAf;;kBAEe;AACX;AACAC,eAAWC,MAAX,EAAmB;AACf,YAAIC,MAAM,6CAAV;AACA,eAAOA,IAAIC,IAAJ,CAASF,MAAT,CAAP;AACH,KALU;AAMX;;;;;;;;AAQAG,+BAA2BC,UAA3B,EAAuCC,QAAvC,EAAiDC,OAAjD,EAA0DC,wBAA1D,EAAoF;AAChF,YAAI,OAAOH,UAAP,KAAuB,QAA3B,EAAqC;AACjC,mBAAO,EAAP;AACH;AACD,YAAII,SAASJ,WAAWK,KAAX,CAAiBJ,QAAjB,EAA2B,CAA3B,EAA8BI,KAA9B,CAAoCH,OAApC,EAA6C,CAA7C,CAAb;AACA,YAAIC,wBAAJ,EAA8B;AAC1BC,qBAASH,WAAWG,MAAX,GAAoBF,OAA7B;AACH;AACD,eAAOE,MAAP;AACH,KAvBU;AAwBX;;;;;;AAMAE,eAAWC,MAAX,EAAmBC,IAAnB,EAAyB;AACrB,eAAOf,OAAOgB,UAAP,CAAkB,MAAlB,EAA0BF,MAA1B,EAAkCG,MAAlC,CAAyCC,KAAKC,SAAL,CAAeJ,IAAf,CAAzC,EAA+DK,MAA/D,GAAwEC,QAAxE,CAAiF,KAAjF,CAAP;AACH;AAhCU,C",
+    "file": "../../src/utils/utils.js",
+    "sourcesContent": [
+        "'use strict';\nconst crypto = require('crypto');\n\nexport default {\n    //邮箱地址正则表达式判断\n    matchEmail(string) {\n        var reg = /\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*/;\n        return reg.test(string);\n    },\n    /**\n     * [getBetweenTwoStringContent 获取两个指定字符串之间的内容，可自定义是否在首尾加上指定字符串]\n     * @param  {[string]}  strContent               [需要操作的字符串]\n     * @param  {[string]}  firstStr                 [首字符串]\n     * @param  {[string]}  lastStr                  [尾字符串]\n     * @param  {Boolean} isHaveFirstStrAndLastStr   [是否包含首尾字符串]\n     * @return {[string]}                           [获取的字符串]\n     */\n    getBetweenTwoStringContent(strContent, firstStr, lastStr, isHaveFirstStrAndLastStr) {\n        if (typeof(strContent) !== 'string') {\n            return '';\n        }\n        let result = strContent.split(firstStr)[1].split(lastStr)[0];\n        if (isHaveFirstStrAndLastStr) {\n            result = firstStr + result + lastStr;\n        }\n        return result;\n    },\n    /**\n     * [sha1Secret github中校验secret的加密方法]\n     * @param  {[string]} secret [github中设置的密钥]\n     * @param  {[object]} body   [thinkjs中的this.post()]\n     * @return {[string]}        [生成的校验值]\n     */\n    sha1Secret(secret, body) {\n        return crypto.createHmac('sha1', secret).update(JSON.stringify(body)).digest().toString('hex');\n    }\n}"
+    ]
+}

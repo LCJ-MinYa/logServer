@@ -1,0 +1,86 @@
+{
+  "port": 8084,
+  "workers": 0,
+  "stickyCluster": false,
+  "startServerTimeout": 3000,
+  "reloadSignal": "SIGUSR2",
+  "processKillTimeout": 10000,
+  "jsonpCallbackField": "callback",
+  "jsonContentType": "application/json",
+  "jsonpContentType": "application/javascript",
+  "errnoField": "errno",
+  "errmsgField": "errmsg",
+  "defaultErrno": 1000,
+  "validateDefaultErrno": 1001,
+  "cache": {
+    "type": "file",
+    "file": {
+      "timeout": 86400000,
+      "cachePath": "/Users/minya/Desktop/logServer/runtime/cache",
+      "pathDepth": 1,
+      "gcInterval": 86400000
+    }
+  },
+  "model": {
+    "type": "mongo",
+    "mongo": {
+      "logConnect": false,
+      "logSql": false,
+      "host": "106.15.193.97",
+      "port": "9000",
+      "user": "chatRoot",
+      "password": "chat5548..",
+      "database": "chat",
+      "prefix": ""
+    },
+    "mongoPassword": {
+      "logConnect": false,
+      "logSql": false,
+      "host": "106.15.193.97",
+      "port": "9000",
+      "user": "passwordRoot",
+      "password": "password5548..",
+      "database": "password",
+      "prefix": ""
+    }
+  },
+  "session": {
+    "type": "file",
+    "file": {
+      "cookie": {
+        "name": "thinkjs"
+      },
+      "sessionPath": "/Users/minya/Desktop/logServer/runtime/session"
+    }
+  },
+  "view": {
+    "type": "ejs",
+    "ejs": {
+      "viewPath": "/Users/minya/Desktop/logServer/view",
+      "sep": "/",
+      "extname": ".html"
+    },
+    "nunjucks": {
+      "viewPath": "/Users/minya/Desktop/logServer/view",
+      "sep": "/",
+      "extname": ".html"
+    }
+  },
+  "logger": {
+    "type": "dateFile",
+    "console": {},
+    "file": {
+      "backups": 10,
+      "absolute": true,
+      "maxLogSize": 51200,
+      "filename": "/Users/minya/Desktop/logServer/logs/app.log"
+    },
+    "dateFile": {
+      "level": "ALL",
+      "absolute": true,
+      "pattern": "-yyyy-MM-dd",
+      "alwaysIncludePattern": true,
+      "filename": "/Users/minya/Desktop/logServer/logs/app.log"
+    }
+  }
+}
