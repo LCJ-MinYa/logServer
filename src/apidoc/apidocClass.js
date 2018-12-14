@@ -78,3 +78,12 @@
  *      "errmsg": "请求不支持POST方法！"
  *  }
  */
+
+/**
+ * @apiDefine CODE_DEPLOY_500 自动部署失败
+ * @apiErrorExample {json} 自动部署失败
+ *  {
+ *      "errno": 500,
+ *      "errmsg": "服务器自动部署失败！"
+ *  }
+ */

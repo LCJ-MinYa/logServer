@@ -26,7 +26,7 @@ import {
  *  {
  *      "data": {},
  *      "errno": 0,
- *      "errmsg": "触发成功"
+ *      "errmsg": "服务器自动部署成功"
  *  }
  *  @apiUse CODE_METHOD_GET_403
  *  @apiUse CODE_METHOD_POST_403
