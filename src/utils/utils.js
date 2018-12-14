@@ -1,4 +1,5 @@
 'use strict';
+const crypto = require('crypto');
 
 export default {
     //邮箱地址正则表达式判断
@@ -23,5 +24,14 @@ export default {
             result = firstStr + result + lastStr;
         }
         return result;
+    },
+    /**
+     * [sha1Secret github中校验secret的加密方法]
+     * @param  {[string]} secret [github中设置的密钥]
+     * @param  {[object]} body   [thinkjs中的this.post()]
+     * @return {[string]}        [生成的校验值]
+     */
+    sha1Secret(secret, body) {
+        return crypto.createHmac('sha1', secret).update(JSON.stringify(body)).digest().toString('hex');
     }
 }

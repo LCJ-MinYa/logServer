@@ -1,5 +1,5 @@
 const BaseRest = require('./rest.js');
-const crypto = require('crypto');
+import Utils from '../../utils/utils';
 import {
     model
 } from '../../config/adapter';
@@ -27,21 +27,30 @@ import {
  *      "errno": 0,
  *      "errmsg": "触发成功"
  *  }
- *  @apiUse CODE_UID_203
- *  @apiUse CODE_REFUSE_401
  *  @apiUse CODE_METHOD_GET_403
  *  @apiUse CODE_METHOD_POST_403
  */
 export default class LogServerWebHook extends BaseRest {
     async indexAction() {
-        console.log('==========开始==========');
-        console.log(this.ip);
-        console.log((this.userAgent || '').toLowerCase());
-        console.log(this.ctx.headers);
-        console.log(this.post());
-        console.log(model.logServerWebhookSecret);
-        console.log(crypto.createHmac('sha1', model.logServerWebhookSecret).update(JSON.stringify(this.post())).digest().toString('hex'));
-        console.log('==========结束==========');
-        this.success({}, '触发成功');
+        if (this.isPost) {
+            const headers = this.ctx.headers;
+            console.log(headers);
+            console.log(headers['user-agent']);
+            if (headers['user-agent'] != 'GitHub-Hookshot/3c05c9b') {
+                this.fail(401, '非法的请求头!');
+                return false;
+            }
+            if (headers['x-github-event'] != 'push') {
+                this.fail(401, '非push触发!');
+                return false;
+            }
+            const sha1Secret = 'sha1=' + Utils(model.logServerWebhookSecret, this.post());
+            console.log(sha1Secret);
+            if (headers['x-hub-signature'] != sha1Secret) {
+                this.fail(401, '非法的密钥!');
+                return false;
+            }
+            this.success({}, '触发成功');
+        }
     }
 }

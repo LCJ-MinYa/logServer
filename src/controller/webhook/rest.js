@@ -9,7 +9,16 @@ module.exports = class extends think.Controller {
         this.id = this.getId();
         this.modelInstance = this.mongo(this.resource);
     }
-    __before() {}
+    __before() {
+        const param = this.isGet ? this.get() : this.post();
+
+        if (this.isGet) {
+            this.fail(403, '请求不支持GET方法！');
+        }
+        if (this.isPost) {
+            this.fail(403, '请求不支持POST方法！');
+        }
+    }
     /**
      * get resource
      * @return {String} [resource name]
