@@ -47,6 +47,7 @@ export default class LogServerWebHook extends BaseRest {
             const cmdStr = "sh -x /root/www/logServer/deploy.sh";
             exec(cmdStr, (err, result) => {
                 if (err) {
+                    console.log('脚本失败结果=' + err);
                     process.exit();
                     reject(err);
                 }
