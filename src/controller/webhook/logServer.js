@@ -51,13 +51,14 @@ export default class LogServerWebHook extends BaseRest {
             workerProcess.stdout.on('data', function(data) {
                 console.log(789);
                 console.log('stdout: ' + data);
-                resolve(data);
+                if (data.indexOf('Applying action restartProcessId on app') > -1) {
+                    resolve(data);
+                }
             });
 
             workerProcess.stderr.on('data', function(data) {
                 console.log(987);
                 console.log('stderr: ' + data);
-                reject(data);
             });
         });
     }
