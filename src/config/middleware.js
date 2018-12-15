@@ -6,7 +6,8 @@ module.exports = [{
         handle: 'meta',
         options: {
             logRequest: isDev,
-            sendResponseTime: isDev
+            sendResponseTime: isDev,
+            sendPowerBy: false,
         }
     }, {
         handle: 'resource',
