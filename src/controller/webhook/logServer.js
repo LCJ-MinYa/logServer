@@ -48,14 +48,14 @@ export default class LogServerWebHook extends BaseRest {
             workerProcess.stdout.on('data', function(data) {
                 //console.log('stdout: ' + data);
                 //shell执行日志
+                if (data.indexOf('Applying action restartProcessId on app') > -1) {
+                    resolve(data);
+                }
             });
 
             workerProcess.stderr.on('data', function(data) {
                 //shell执行命令
                 console.log('stderr: ' + data);
-                if (data.indexOf("echo done") > -1) {
-                    resolve(data);
-                }
             });
             setTimeout(() => {
                 //10秒超时就返回失败
