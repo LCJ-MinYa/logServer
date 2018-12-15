@@ -22,31 +22,25 @@ import {
  */
 export default class LogServerWebHook extends BaseRest {
     async indexAction() {
-        if (this.isPost) {
-            const headers = this.ctx.headers;
-            if (headers['user-agent'].indexOf('GitHub-Hookshot/') <= -1) {
-                this.fail(401, '非法的请求头!');
-                return false;
-            }
-            if (headers['x-github-event'] != 'push') {
-                this.fail(401, '非push触发!');
-                return false;
-            }
-            const sha1Secret = 'sha1=' + Utils.sha1Secret(model.logServerWebhookSecret, this.post());
-            console.log(sha1Secret);
-            if (headers['x-hub-signature'] != sha1Secret) {
-                this.fail(401, '非法的密钥!');
-                return false;
-            }
-
-            this.doCmdStr().then(result => {
-                console.log('成功结果=' + result);
-                this.success({}, '更新网站成功!');
-            }).then(err => {
-                console.log('失败结果=' + err);
-                this.fail(401, '更新网站失败!');
-            })
+        const headers = this.ctx.headers;
+        if (headers['user-agent'].indexOf('GitHub-Hookshot/') <= -1) {
+            this.fail(401, '非法的请求头!');
+            return false;
         }
+        if (headers['x-github-event'] != 'push') {
+            this.fail(401, '非push触发!');
+            return false;
+        }
+        const sha1Secret = 'sha1=' + Utils.sha1Secret(model.logServerWebhookSecret, this.post());
+        console.log(sha1Secret);
+        if (headers['x-hub-signature'] != sha1Secret) {
+            this.fail(401, '非法的密钥!');
+            return false;
+        }
+
+        const cmdStrResult = await this.doCmdStr();
+        console.log('成功结果=' + cmdStrResult);
+        this.success({}, '更新网站成功!');
     }
     doCmdStr() {
         return new Promise((resolve, reject) => {
