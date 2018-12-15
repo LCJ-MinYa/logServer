@@ -23,41 +23,36 @@ import {
 export default class LogServerWebHook extends BaseRest {
     async indexAction() {
         const headers = this.ctx.headers;
-        // if (headers['user-agent'].indexOf('GitHub-Hookshot/') <= -1) {
-        //     this.fail(401, '非法的请求头!');
-        //     return false;
-        // }
-        // if (headers['x-github-event'] != 'push') {
-        //     this.fail(401, '非push触发!');
-        //     return false;
-        // }
-        // const sha1Secret = 'sha1=' + Utils.sha1Secret(model.logServerWebhookSecret, this.post());
-        // console.log(sha1Secret);
-        // if (headers['x-hub-signature'] != sha1Secret) {
-        //     this.fail(401, '非法的密钥!');
-        //     return false;
-        // }
+        if (headers['user-agent'].indexOf('GitHub-Hookshot/') <= -1) {
+            this.fail(401, '非法的请求头!');
+            return false;
+        }
+        if (headers['x-github-event'] != 'push') {
+            this.fail(401, '非push触发!');
+            return false;
+        }
+        const sha1Secret = 'sha1=' + Utils.sha1Secret(model.logServerWebhookSecret, this.post());
+        console.log(sha1Secret);
+        if (headers['x-hub-signature'] != sha1Secret) {
+            this.fail(401, '非法的密钥!');
+            return false;
+        }
 
-        console.log(123);
         const cmdStrResult = await this.doCmdStr();
         console.log('成功结果=' + cmdStrResult);
         this.success({}, '更新网站成功!');
     }
     doCmdStr() {
         return new Promise((resolve, reject) => {
-            console.log(456);
             const cmdStr = "sh -x /root/www/logServer/deploy.sh";
             let workerProcess = exec(cmdStr);
             workerProcess.stdout.on('data', function(data) {
-                console.log(789);
-                console.log('stdout: ' + data);
                 if (data.indexOf('Applying action restartProcessId on app') > -1) {
                     resolve(data);
                 }
             });
 
             workerProcess.stderr.on('data', function(data) {
-                console.log(987);
                 console.log('stderr: ' + data);
             });
         });
