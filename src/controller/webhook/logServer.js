@@ -32,7 +32,6 @@ export default class LogServerWebHook extends BaseRest {
             return false;
         }
         const sha1Secret = 'sha1=' + Utils.sha1Secret(model.logServerWebhookSecret, this.post());
-        console.log(sha1Secret);
         if (headers['x-hub-signature'] != sha1Secret) {
             this.fail(401, '非法的密钥!');
             return false;
@@ -47,14 +46,21 @@ export default class LogServerWebHook extends BaseRest {
             const cmdStr = "sh -x /root/www/logServer/deploy.sh";
             let workerProcess = exec(cmdStr);
             workerProcess.stdout.on('data', function(data) {
-                if (data.indexOf('Applying action restartProcessId on app') > -1) {
-                    resolve(data);
-                }
+                //console.log('stdout: ' + data);
+                //shell执行日志
             });
 
             workerProcess.stderr.on('data', function(data) {
+                //shell执行命令
                 console.log('stderr: ' + data);
+                if (data.indexOf("echo done") > -1) {
+                    resolve(data);
+                }
             });
+            setTimeout(() => {
+                //10秒超时就返回失败
+                reject('fail');
+            }, 10000);
         });
     }
 }
