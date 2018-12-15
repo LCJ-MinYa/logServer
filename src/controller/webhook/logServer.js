@@ -48,10 +48,10 @@ export default class LogServerWebHook extends BaseRest {
             exec(cmdStr, (err, result) => {
                 if (err) {
                     console.log('脚本失败结果=' + err);
-                    reject(err);
+                    return reject(err);
                 }
                 console.log('脚本成功结果=' + result);
-                resolve(result);
+                return resolve(result);
             });
         });
     }
