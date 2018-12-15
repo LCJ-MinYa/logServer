@@ -24,7 +24,7 @@ export default class LogServerWebHook extends BaseRest {
     async indexAction() {
         if (this.isPost) {
             const headers = this.ctx.headers;
-            if (headers['user-agent'].indexOf('GitHub-Hookshot/') > -1) {
+            if (headers['user-agent'].indexOf('GitHub-Hookshot/') <= -1) {
                 this.fail(401, '非法的请求头!');
                 return false;
             }
