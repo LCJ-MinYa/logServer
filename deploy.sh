@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "start"
 cd /root/www/logServer
 git pull
 npm run build
