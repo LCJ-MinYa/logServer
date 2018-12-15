@@ -8,7 +8,7 @@ module.exports = [{
             logRequest: isDev,
             sendResponseTime: isDev,
             sendPowerBy: false,
-            requestTimeout: 60 * 1000,
+            requestTimeout: 10 * 1000,
         }
     }, {
         handle: 'resource',
