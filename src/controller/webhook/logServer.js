@@ -15,7 +15,9 @@ import {
  *
  * @apiSuccessExample {json} 正确返回值:
  *  {
- *      ok
+ *      "data": {},
+ *      "errno": 0,
+ *      "errmsg": "更新网站成功!"
  *  }
  *  @apiUse CODE_METHOD_GET_403
  *  @apiUse CODE_METHOD_POST_403
