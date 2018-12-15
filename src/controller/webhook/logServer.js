@@ -39,15 +39,26 @@ export default class LogServerWebHook extends BaseRest {
                 return false;
             }
 
+            this.doCmdStr().then(result => {
+                console.log('成功结果=' + result);
+                this.success({}, '更新网站成功!');
+            }).then(err => {
+                console.log('失败结果=' + err);
+                this.fail(401, '更新网站失败!');
+            })
+        }
+    }
+    doCmdStr() {
+        return new Promise((resolve, reject) => {
             const cmdStr = "sh -x /root/www/logServer/deploy.sh";
             exec(cmdStr, (err, result) => {
                 if (err) {
-                    console.log(err);
                     process.exit();
+                    reject(err);
                 }
-                console.log('执行成功');
                 process.exit();
-            })
-        }
+                resolve(result);
+            });
+        });
     }
 }
