@@ -47,14 +47,17 @@ export default class LogServerWebHook extends BaseRest {
         return new Promise((resolve, reject) => {
             console.log(456);
             const cmdStr = "sh -x /root/www/logServer/deploy.sh";
-            exec(cmdStr, (err, result) => {
+            let workerProcess = exec(cmdStr);
+            workerProcess.stdout.on('data', function(data) {
                 console.log(789);
-                if (err) {
-                    console.log('脚本失败结果=' + err);
-                    return reject(err);
-                }
-                console.log('脚本成功结果=' + result);
-                return resolve(result);
+                console.log('stdout: ' + data);
+                resolve(data);
+            });
+
+            workerProcess.stderr.on('data', function(data) {
+                console.log(987);
+                console.log('stderr: ' + data);
+                reject(data);
             });
         });
     }
