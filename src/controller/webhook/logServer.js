@@ -50,6 +50,7 @@ export default class LogServerWebHook extends BaseRest {
                     process.exit();
                     reject(err);
                 }
+                console.log('脚本成功结果=' + result);
                 process.exit();
                 resolve(result);
             });
