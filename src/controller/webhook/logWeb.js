@@ -57,7 +57,7 @@ export default class LogWebWebHook extends BaseRest {
             const cmdStr = "sh -x /root/www/logWeb/deploy.sh";
             let workerProcess = exec(cmdStr);
             workerProcess.stdout.on('data', function(data) {
-                console.log('stdout: ' + data);
+                //console.log('stdout: ' + data);
                 //shell执行日志
                 if (data.indexOf('Build complete') > -1) {
                     resolve(data);
@@ -65,13 +65,16 @@ export default class LogWebWebHook extends BaseRest {
             });
 
             workerProcess.stderr.on('data', function(data) {
-                //shell执行命令
+                //shell执行命令 github超时时间等不到服务器编译完成，暂未找到在哪里设置
                 console.log('stderr: ' + data);
+                if (data.indexOf('npm run build') > -1) {
+                    resolve(data);
+                }
             });
             setTimeout(() => {
                 //10秒超时就返回失败
                 reject('编译超时');
-            }, 60000);
+            }, 10000);
         });
     }
 }
