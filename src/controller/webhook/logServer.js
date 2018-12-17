@@ -46,9 +46,11 @@ export default class LogServerWebHook extends BaseRest {
             this.fail(500, '更新网站超时!');
             return false;
         });
-        console.log('成功结果=' + cmdStrResult);
-        this.success({}, '更新网站成功!');
-        return false;
+        if (cmdStrResult) {
+            console.log('成功结果=' + cmdStrResult);
+            this.success({}, '更新网站成功!');
+            return false;
+        }
     }
     doCmdStr() {
         return new Promise((resolve, reject) => {

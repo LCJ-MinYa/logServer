@@ -46,9 +46,11 @@ export default class LogWebWebHook extends BaseRest {
             this.fail(500, '更新网站超时!');
             return false;
         });
-        console.log('成功结果=' + cmdStrResult);
-        this.success({}, '更新网站成功!');
-        return false;
+        if (cmdStrResult) {
+            console.log('成功结果=' + cmdStrResult);
+            this.success({}, '更新网站成功!');
+            return false;
+        }
     }
     doCmdStr() {
         return new Promise((resolve, reject) => {
@@ -69,7 +71,7 @@ export default class LogWebWebHook extends BaseRest {
             setTimeout(() => {
                 //10秒超时就返回失败
                 reject('编译超时');
-            }, 10000);
+            }, 60000);
         });
     }
 }
