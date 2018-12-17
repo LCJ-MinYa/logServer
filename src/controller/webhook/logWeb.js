@@ -41,9 +41,14 @@ export default class LogWebWebHook extends BaseRest {
             return false;
         }
 
-        const cmdStrResult = await this.doCmdStr();
+        const cmdStrResult = await this.doCmdStr().catch(err => {
+            console.log('失败结果=' + err);
+            this.fail(500, '更新网站超时!');
+            return false;
+        });
         console.log('成功结果=' + cmdStrResult);
         this.success({}, '更新网站成功!');
+        return false;
     }
     doCmdStr() {
         return new Promise((resolve, reject) => {
@@ -60,13 +65,10 @@ export default class LogWebWebHook extends BaseRest {
             workerProcess.stderr.on('data', function(data) {
                 //shell执行命令
                 console.log('stderr: ' + data);
-                if (data.indexOf('npm run build') > -1) {
-                    resolve(data);
-                }
             });
             setTimeout(() => {
                 //10秒超时就返回失败
-                reject('fail');
+                reject('编译超时');
             }, 10000);
         });
     }
