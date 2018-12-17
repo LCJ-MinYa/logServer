@@ -34,6 +34,8 @@ export default class LogWebWebHook extends BaseRest {
             return false;
         }
         const sha1Secret = 'sha1=' + Utils.sha1Secret(model.logWebWebhookSecret, this.post());
+        console.log('生成的sha1key =' + sha1Secret);
+        console.log('header的sha1key =' + headers['x-hub-signature']);
         if (headers['x-hub-signature'] != sha1Secret) {
             this.fail(401, '非法的密钥!');
             return false;
