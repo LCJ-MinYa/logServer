@@ -50,7 +50,7 @@ export default class LogWebWebHook extends BaseRest {
             workerProcess.stdout.on('data', function(data) {
                 console.log('stdout: ' + data);
                 //shell执行日志
-                if (data.indexOf('Applying action restartProcessId on app') > -1) {
+                if (data.indexOf('Build complete') > -1) {
                     resolve(data);
                 }
             });
