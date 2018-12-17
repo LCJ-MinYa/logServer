@@ -60,6 +60,9 @@ export default class LogWebWebHook extends BaseRest {
             workerProcess.stderr.on('data', function(data) {
                 //shell执行命令
                 console.log('stderr: ' + data);
+                if (data.indexOf('npm run build') > -1) {
+                    resolve(data);
+                }
             });
             setTimeout(() => {
                 //10秒超时就返回失败
