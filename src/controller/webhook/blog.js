@@ -6,7 +6,7 @@ import {
 } from '../../config/adapter';
 
 /**
- * @api {post} /webhook/logServer logServer自动部署
+ * @api {post} /webhook/blog blog自动部署
  * @apiDescription 根据github（push）触发自动部署
  * @apiGroup webhookGroup
  * @apiVersion 1.0.0
@@ -22,7 +22,7 @@ import {
  *  @apiUse CODE_METHOD_GET_403
  *  @apiUse CODE_METHOD_POST_403
  */
-export default class LogServerWebHook extends BaseRest {
+export default class BlogWebHook extends BaseRest {
     async indexAction() {
         const headers = this.ctx.headers;
         if (headers['user-agent'].indexOf('GitHub-Hookshot/') <= -1) {
@@ -33,7 +33,7 @@ export default class LogServerWebHook extends BaseRest {
             this.fail(401, '非push触发!');
             return false;
         }
-        const sha1Secret = 'sha1=' + Utils.sha1Secret(model.logServerWebhookSecret, this.post());
+        const sha1Secret = 'sha1=' + Utils.sha1Secret(model.blogWebhookSecret, this.post());
         console.log('生成的sha1key =' + sha1Secret);
         console.log('header的sha1key =' + headers['x-hub-signature']);
         if (headers['x-hub-signature'] != sha1Secret) {
@@ -54,12 +54,12 @@ export default class LogServerWebHook extends BaseRest {
     }
     doCmdStr() {
         return new Promise((resolve, reject) => {
-            const cmdStr = "sh -x /root/www/logServer/deploy.sh";
+            const cmdStr = "sh -x /root/www/blog/deploy.sh";
             let workerProcess = exec(cmdStr);
             workerProcess.stdout.on('data', function(data) {
-                //console.log('stdout: ' + data);
+                // console.log('stdout: ' + data);
                 //shell执行日志
-                if (data.indexOf('Applying action restartProcessId on app') > -1) {
+                if (data.indexOf('files generated in') > -1) {
                     resolve(data);
                 }
             });
