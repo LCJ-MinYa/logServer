@@ -67,6 +67,9 @@ export default class BlogWebHook extends BaseRest {
             workerProcess.stderr.on('data', function(data) {
                 //shell执行命令
                 console.log('stderr: ' + data);
+                if (data.indexOf('hexo g') > -1) {
+                    resolve(data);
+                }
             });
             setTimeout(() => {
                 //10秒超时就返回失败
