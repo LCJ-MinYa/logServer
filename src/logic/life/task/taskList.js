@@ -1,5 +1,5 @@
-import CheckPostReq from '../class/checkPostReq';
+import CheckGetReq from '../class/checkGetReq';
 
-export default class TaskList extends CheckPostReq {
+export default class TaskList extends CheckGetReq {
 
 }
