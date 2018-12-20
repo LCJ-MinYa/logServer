@@ -57,6 +57,8 @@ export default class CreatTaskItem extends BaseRest {
         const PasswordList = think.mongo('TaskItem', 'mongoPassword');
         let param = this.post();
         delete param.accessToken;
+        param.isComplete = JSON.parse(param.isComplete);
+        param.tag = JSON.parse(param.tag);
         let result = await PasswordList.where({
             uid: param.uid,
             title: param.title,

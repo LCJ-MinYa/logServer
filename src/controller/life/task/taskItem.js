@@ -62,7 +62,7 @@ export default class TaskItem extends BaseRest {
         const isComplete = param.itemType == 'complete';
         let result = await TaskItemDB.where({
             uid: param.uid,
-            isComplete: isComplete.toString(),
+            isComplete: isComplete,
             type: param.listType
         }).order('timestamp').select();
         this.success(result, '获取任务列表成功');
