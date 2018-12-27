@@ -31,6 +31,9 @@ const BaseRest = require('../rest.js');
  * @apiSuccess {String} data._id 任务id
  * @apiSuccess {String} data.uid 任务所属用户
  * @apiSuccess {String} data.timestamp 任务创建时间
+ * @apiSuccess {Array}  data.beginDate 任务开始时间
+ * @apiSuccess {Array}  data.endDate 任务完成时间
+ * @apiSuccess {Number} data.totalTime 任务耗时
  *
  * @apiSuccessExample {json} 正确返回值:
  *  {
@@ -45,7 +48,10 @@ const BaseRest = require('../rest.js');
  *          "notes": "notes",
  *          "timestamp": 1543578242441,
  *          "_id": '_id',
- *          "uid": 'user-uid'
+ *          "uid": 'user-uid',
+ *          "beginDate": [],
+ *          "endDate": [],
+ *          "totalTime": 0
  *      }],
  *      "errno": 0,
  *      "errmsg": "获取任务列表成功"

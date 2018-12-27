@@ -59,6 +59,9 @@ export default class CreatTaskItem extends BaseRest {
         delete param.accessToken;
         param.isComplete = JSON.parse(param.isComplete);
         param.tag = JSON.parse(param.tag);
+        param.beginDate = [];
+        param.endDate = [];
+        param.totalTime = 0;
         let result = await PasswordList.where({
             uid: param.uid,
             title: param.title,
