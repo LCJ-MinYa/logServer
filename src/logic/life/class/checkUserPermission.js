@@ -14,12 +14,13 @@ export default class checkUserPermission extends think.Logic {
         }
     }
     verifyAccessToken(param) {
-        if (param.accessToken) {
-            // if (param.timestamp) {
-            //     let newTimestamp = new Date().getTime();
-            //     let oldTimestamp;
-            //     console.log('这里需要判断请求的时间是否在一分钟之内，防止过期请求,同时过滤来自api.ziyiu.com允许测试api过期请求');
-            // }
+        if (param.accessToken && param.timestamp) {
+            let newTimestamp = new Date().getTime();
+            let oldTimestamp = parseInt(param.timestamp);
+            if (newTimestamp - oldTimestamp > 30 * 1000 || newTimestamp - oldTimestamp < 0) {
+                this.fail(401, '瞎请求干啥，心疼我的服务器!');
+                return false;
+            }
             if (param.accessToken !== encryp.sha1(param.uid + param.timestamp).substring(3, 10)) {
                 this.fail(401, '瞎请求干啥，心疼我的服务器!');
                 return false;

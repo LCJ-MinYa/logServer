@@ -1,4 +1,5 @@
 const BaseRest = require('../rest.js');
+const moment = require('moment');
 
 /**
  * @api {post} /life/task/creatTaskItem 创建任务
@@ -37,7 +38,11 @@ const BaseRest = require('../rest.js');
  * @apiSuccessExample {json} 正确返回值:
  *  {
  *      "data": {
- *          "_id": "_id"
+ *          "_id": "_id",
+ *          "beginDate": "beginDate",
+ *          "endDate": "endDate",
+ *          "totalTime": "totalTime",
+ *          "completeDate": "completeDate"
  *      },
  *      "errno": 0,
  *      "errmsg": "项目新增任务成功"
@@ -55,13 +60,17 @@ const BaseRest = require('../rest.js');
 export default class CreatTaskItem extends BaseRest {
     async indexAction() {
         const PasswordList = think.mongo('TaskItem', 'mongoPassword');
+        const nowDate = moment().format("YYYY-MM-DD HH:mm:ss");
         let param = this.post();
         delete param.accessToken;
+        delete param.timestamp;
         param.isComplete = JSON.parse(param.isComplete);
         param.tag = JSON.parse(param.tag);
         param.beginDate = [];
         param.endDate = [];
         param.totalTime = 0;
+        param.creatTime = nowDate;
+        param.completeDate = param.isComplete ? nowDate : '';
         let result = await PasswordList.where({
             uid: param.uid,
             title: param.title,
@@ -69,7 +78,11 @@ export default class CreatTaskItem extends BaseRest {
         }).thenAdd(param);
         if (result.type == 'add') {
             this.success({
-                _id: result._id
+                _id: result._id,
+                beginDate: param.beginDate,
+                endDate: param.endDate,
+                totalTime: param.totalTime,
+                completeDate: param.completeDate
             }, '项目新增任务成功');
             return false;
         } else {

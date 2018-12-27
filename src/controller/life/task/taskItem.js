@@ -30,10 +30,11 @@ const BaseRest = require('../rest.js');
  * @apiSuccess {String} data.notes 备注
  * @apiSuccess {String} data._id 任务id
  * @apiSuccess {String} data.uid 任务所属用户
- * @apiSuccess {String} data.timestamp 任务创建时间
+ * @apiSuccess {String} data.creatTime 任务创建时间
  * @apiSuccess {Array}  data.beginDate 任务开始时间
- * @apiSuccess {Array}  data.endDate 任务完成时间
+ * @apiSuccess {Array}  data.endDate 任务停止时间
  * @apiSuccess {Number} data.totalTime 任务耗时
+ * @apiSuccess {String} data.completeDate 任务完成时间
  *
  * @apiSuccessExample {json} 正确返回值:
  *  {
@@ -46,7 +47,7 @@ const BaseRest = require('../rest.js');
  *          "type": "type",
  *          "importance": "importance",
  *          "notes": "notes",
- *          "timestamp": 1543578242441,
+ *          "creatTime": "creatTime",
  *          "_id": '_id',
  *          "uid": 'user-uid',
  *          "beginDate": [],
