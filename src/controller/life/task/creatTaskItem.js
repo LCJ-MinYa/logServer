@@ -34,6 +34,10 @@ const moment = require('moment');
  *
  * @apiUse baseSuccessParams
  * @apiSuccess {String} data._id 密码存储id
+ * @apiSuccess {Array}  data.beginDate 任务开始时间
+ * @apiSuccess {Array}  data.endDate 任务停止时间
+ * @apiSuccess {Number} data.totalTime 任务耗时
+ * @apiSuccess {String} data.completeDate 任务完成时间
  *
  * @apiSuccessExample {json} 正确返回值:
  *  {
