@@ -17,10 +17,11 @@ export default class checkUserPermission extends think.Logic {
         if (param.accessToken && param.timestamp) {
             let newTimestamp = new Date().getTime();
             let oldTimestamp = parseInt(param.timestamp);
-            if (newTimestamp - oldTimestamp > 30 * 1000 || newTimestamp - oldTimestamp < 0) {
-                this.fail(401, '瞎请求干啥，心疼我的服务器!');
-                return false;
-            }
+            console.log(newTimestamp, oldTimestamp);
+            // if (newTimestamp - oldTimestamp > 30 * 1000 || newTimestamp - oldTimestamp < 0) {
+            //     this.fail(401, '瞎请求干啥，心疼我的服务器!');
+            //     return false;
+            // }
             if (param.accessToken !== encryp.sha1(param.uid + param.timestamp).substring(3, 10)) {
                 this.fail(401, '瞎请求干啥，心疼我的服务器!');
                 return false;
