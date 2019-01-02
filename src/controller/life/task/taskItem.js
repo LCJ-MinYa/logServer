@@ -20,21 +20,7 @@ const BaseRest = require('../rest.js');
  *  }
  *
  * @apiUse baseSuccessParams
- * @apiSuccess {String} data.title 标题
- * @apiSuccess {bool}   data.isComplete 任务状态（是否完成）
- * @apiSuccess {String} data.type 任务所属项目
- * @apiSuccess {String} data.importance 优先级
- * @apiSuccess {String} data.date 截止日期
- * @apiSuccess {String} data.time 截止时间
- * @apiSuccess {Array}  data.tag 任务tag
- * @apiSuccess {String} data.notes 备注
- * @apiSuccess {String} data._id 任务id
- * @apiSuccess {String} data.uid 任务所属用户
- * @apiSuccess {String} data.creatTime 任务创建时间
- * @apiSuccess {Array}  data.beginDate 任务开始时间
- * @apiSuccess {Array}  data.endDate 任务停止时间
- * @apiSuccess {Number} data.totalTime 任务耗时
- * @apiSuccess {String} data.completeDate 任务完成时间
+ * @apiUse baseTaskItemSuccess
  *
  * @apiSuccessExample {json} 正确返回值:
  *  {

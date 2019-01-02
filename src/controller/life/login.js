@@ -50,6 +50,7 @@ export default class Login extends BaseRest {
 					uid: result[0].uid,
 					userName: result[0].userName
 				}, '登录成功');
+				return false;
 			} else {
 				this.fail(401, '用户名或密码错误!');
 				return false;
