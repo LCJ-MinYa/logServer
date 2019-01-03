@@ -41,32 +41,31 @@ import Moment from 'moment';
  *          "uid": 'user-uid',
  *          "beginDate": [],
  *          "endDate": [],
- *          "totalTime": 0
+ *          "totalTime": 0,
+ *          "completeDate": "completeDate"
  *      },
  *      "errno": 0,
- *      "errmsg": "停止任务成功!"
+ *      "errmsg": "修改任务停止时间成功!"
  *  }
- * @apiErrorExample {json} 参数缺失:
+ * @apiErrorExample {json} 参数缺失
  *  {
  *      "errno": 400,
  *      "errmsg": "任务id不存在!"
  *  }
- * @apiErrorExample {json} 参数缺失:
  *  {
  *      "errno": 400,
  *      "errmsg": "任务所属项目不存在!"
  *  }
- * @apiErrorExample {json} 参数缺失:
  *  {
  *      "errno": 400,
  *      "errmsg": "任务类型不存在!"
  *  }
- * @apiErrorExample {json} 任务已完成:
+ * @apiErrorExample {json} 任务已完成
  *  {
  *      "errno": 400,
  *      "errmsg": "已完成任务不能停止!"
  *  }
- * @apiErrorExample {json} 任务不存在:
+ * @apiErrorExample {json} 任务不存在
  *  {
  *      "errno": 401,
  *      "errmsg": "任务不存在!"

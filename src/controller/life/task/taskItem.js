@@ -38,7 +38,8 @@ const BaseRest = require('../rest.js');
  *          "uid": 'user-uid',
  *          "beginDate": [],
  *          "endDate": [],
- *          "totalTime": 0
+ *          "totalTime": 0,
+ *          "completeDate": "completeDate"
  *      }],
  *      "errno": 0,
  *      "errmsg": "获取任务列表成功"
