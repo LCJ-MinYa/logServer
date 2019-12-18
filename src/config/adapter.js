@@ -39,7 +39,6 @@ exports.model = {
         logger: msg => think.logger.info(msg)
     },
     //#smudge mongodb配置
-    //测试git忽略
 };
 
 /**
