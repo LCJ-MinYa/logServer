@@ -25,14 +25,17 @@ import {
 export default class BlogWebHook extends BaseRest {
     async indexAction() {
         const headers = this.ctx.headers;
+        console.log('第一步');
         if (headers['user-agent'].indexOf('GitHub-Hookshot/') <= -1) {
             this.fail(401, '非法的请求头!');
             return false;
         }
+        console.log('第二步');
         if (headers['x-github-event'] != 'push') {
             this.fail(401, '非push触发!');
             return false;
         }
+        console.log('第三步');
         const sha1Secret = 'sha1=' + Utils.sha1Secret(model.blogWebhookSecret, this.post());
         console.log('生成的sha1key =' + sha1Secret);
         console.log('header的sha1key =' + headers['x-hub-signature']);
@@ -40,7 +43,7 @@ export default class BlogWebHook extends BaseRest {
             this.fail(401, '非法的密钥!');
             return false;
         }
-
+        console.log('第四步');
         const cmdStrResult = await this.doCmdStr().catch(err => {
             console.log('失败结果=' + err);
             this.fail(500, '更新网站超时!');
@@ -54,6 +57,7 @@ export default class BlogWebHook extends BaseRest {
     }
     doCmdStr() {
         return new Promise((resolve, reject) => {
+            console.log('第五步,执行shell');
             const cmdStr = "sh -x /root/www/blog/deploy.sh";
             let workerProcess = exec(cmdStr);
             workerProcess.stdout.on('data', function(data) {
